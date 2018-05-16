@@ -60,7 +60,7 @@ def register():
             return redirect('login')
         else:
             flash('Registration error: Username is already in use.')
-            return render_template('register.html')
+            return render_template('signin.html')
 
 @app.route('/teams')
 def teams():
