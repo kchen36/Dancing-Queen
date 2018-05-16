@@ -66,18 +66,24 @@ def register():
 def teams():
     render_template('teams.html')
 
-@app.route('create_team')
+@app.route('/create_team')
 def create_team():
     render_template('create_team.html')
 
-@app.route('pieces')
+@app.route('/pieces')
 def pieces():
     render_template('pieces.html')
 
-@app.route('create_piece')
-def create_piece()
+@app.route('/create_piece')
+def create_piece():
     render_template('create_piece.html')
 
-@app.route('edit')
+@app.route('/edit')
 def view_piece():
     render_template('view_piece.html')
+
+
+    
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
