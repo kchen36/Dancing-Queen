@@ -7,3 +7,7 @@ c.execute('CREATE TABLE IF NOT EXISTS user (username STRING PRIMARY KEY, pass IN
 c.execute('CREATE TABLE IF NOT EXISTS team (name STRING, id INTEGER PRIMARY KEY);');
 c.execute 
 db.close();
+
+#adduser(username, encrypt(password))
+#change_password(username, encrypt(password))
+#get_password(username)
