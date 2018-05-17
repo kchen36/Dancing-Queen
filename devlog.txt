@@ -8,3 +8,6 @@ added app.py and auth.py
 chenK -- 2018-05-16 21:53:58
 user methods are written
 
+WongE -- 2018-05-17 14:51:29
+made auth.py
+
