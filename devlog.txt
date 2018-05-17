@@ -5,3 +5,6 @@ did databases
 ahmedF -- 2018-05-16 14:39:01
 added app.py and auth.py
 
+chenK -- 2018-05-16 21:53:58
+user methods are written
+
