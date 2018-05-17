@@ -17,11 +17,9 @@ app.jinja_env.globals.update(logged_in = auth.logged_in)
 
 @app.route('/')
 @app.route('/index')
+@auth.in_session
 def index():
-    if auth.logged_in():
-        return render_template('home.html')
-    else:
-        return render_template('index.html')
+    return render_template('home.html')
 
 #login: Login page. Renders login.html. Redirects to index after logging in.
 @app.route('/login', methods=['GET', 'POST'])
@@ -67,6 +65,7 @@ def teams():
     render_template('teams.html')
 
 @app.route('/create_team')
+@auth.in_session
 def create_team():
     render_template('create_team.html')
 
@@ -75,10 +74,12 @@ def pieces():
     render_template('pieces.html')
 
 @app.route('/create_piece')
+@auth.in_session
 def create_piece():
     render_template('create_piece.html')
 
 @app.route('/edit')
+@auth.in_session
 def view_piece():
     render_template('view_piece.html')
 
