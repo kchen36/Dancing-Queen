@@ -14,3 +14,6 @@ user methods are written
 chenK -- 2018-05-17 14:45:40
 wrote changepass, getnick, add member and createteam
 
+parkP -- 2018-05-17 14:51:45
+added mroe templates
+
