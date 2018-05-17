@@ -5,9 +5,17 @@ did databases
 ahmedF -- 2018-05-16 14:39:01
 added app.py and auth.py
 
+parkP -- 2018-05-16 14:41:07
+added basic html templates
+
 chenK -- 2018-05-16 21:53:58
 user methods are written
 
 WongE -- 2018-05-17 14:51:29
 made auth.py
 
+chenK -- 2018-05-17 14:45:40
+wrote changepass, getnick, add member and createteam
+
+parkP -- 2018-05-17 14:51:45
+added mroe templates
