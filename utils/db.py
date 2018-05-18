@@ -85,3 +85,13 @@ def changepass(username, password):
     c.execute('UPDATE users SET password = "%s" WHERE username = "%s";' %(password, username))
     db.commit()
     db.close()
+
+def addpermission(pieceid, username):
+    f = "app.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('INSERT INTO permissions VALUES("%d", "%s");' %(pieceid, username))
+    db.commit()
+    db.close()
+
+    
