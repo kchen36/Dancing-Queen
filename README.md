@@ -3,7 +3,7 @@
 ## deployment
 206.189.237.99
 
-Kerry Chen ( Project Manager), Philip Park, Fabiha Ahmed
+Kerry Chen(Project Manager), Philip Park, Fabiha Ahmed, Edmond Wong
 
 ## Description
 
