@@ -19,3 +19,6 @@ wrote changepass, getnick, add member and createteam
 
 parkP -- 2018-05-17 14:51:45
 added mroe templates
+WongE -- 2018-05-18 02:52:02
+apache
+
