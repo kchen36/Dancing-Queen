@@ -7,14 +7,14 @@ db = sqlite3.connect(f)
 c = db.cursor()
 c.execute('CREATE TABLE IF NOT EXISTS users (username STRING PRIMARY KEY, password STRING);')
 c.execute('CREATE TABLE IF NOT EXISTS teams (name STRING, id INTEGER PRIMARY KEY);')
-c.execute('CREATE TABLE IF NOT EXIST members (id INTEGER PRIMARY KEY, leader BIT,name STRING, nickname STRING);')
-c.execute('CREATE TABLE IF NOT EXIST permissions(id INTEGER PRIMARY KEY, user STRING);')
-c.execute('CREATE TABLE IF NOT EXIST pieces(teamid INTEGER, pieceid INTEGER, song STRING, path STRING, name STRING, length INTEGER, width INTEGER, rows INTEGER, columns INTEGER, privacy BIT);')
-c.execute('CREATE TABLE IF NOT EXIST formations(id INTEGER,formid INTEGER, dancer STRING, x INTEGER, y INTEGER, time, INTEGER, tag STRING);')
+c.execute('CREATE TABLE IF NOT EXISTS members (id INTEGER PRIMARY KEY, leader BIT,name STRING, nickname STRING);')
+c.execute('CREATE TABLE IF NOT EXISTS permissions(id INTEGER PRIMARY KEY, user STRING);')
+c.execute('CREATE TABLE IF NOT EXISTS pieces(teamid INTEGER, pieceid INTEGER, song STRING, path STRING, name STRING, length INTEGER, width INTEGER, rows INTEGER, columns INTEGER, privacy BIT);')
+c.execute('CREATE TABLE IF NOT EXISTS formations(id INTEGER,formid INTEGER, dancer STRING, x INTEGER, y INTEGER, time, INTEGER, tag STRING);')
 db.close()
 
 #hash password
-def encrypt(pass):
+def encrypt(password):
     return hashlib.sha224(password).hexdigest()
 
 #adds user to users table and returns true if sucessful else returns false
