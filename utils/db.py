@@ -113,7 +113,7 @@ def getteams(username):
     return result
 
 def removepermission(user,pieceid):
-     f = "app.db"
+    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     C.execute('DELETE * FROM permissions WHERE user = "%s" AND id = "%d"' %(user, id))
