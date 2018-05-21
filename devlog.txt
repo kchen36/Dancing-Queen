@@ -34,3 +34,6 @@ bugfix and added gitignore
 WongE -- 2018-05-21 14:36:18
 setting up droplet in progress
 
+chenK -- 2018-05-21 14:48:37
+Wrote del and edit form, get pieces and remove permission and checkpermission
+

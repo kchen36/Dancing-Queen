@@ -76,7 +76,8 @@ def getnick(name,teamid):
     c.execute('SELECT nickname FROM members WHERE name = "%s" and id = "%d");' %(name, teamid))
     db.commit()
     db.close()
-    
+
+#changes the password of a user
 def changepass(username, password):
     password = encrypt(password)
     f = "app.db"
@@ -86,6 +87,7 @@ def changepass(username, password):
     db.commit()
     db.close()
 
+#allows a person to edit a piece
 def addpermission(pieceid, username):
     f = "app.db"
     db = sqlite3.connect(f)
@@ -94,6 +96,21 @@ def addpermission(pieceid, username):
     db.commit()
     db.close()
 
+#checks if a person has permission to a piece returns True/False
+def checkpermission(pieceid, username):
+    f = "app.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('SELECT * FROM permissions WHERE id = "%d" AND user ="%d";' %(pieceid, username))
+    result = c.fetchall()
+    if result == []:
+        db.close()
+        return False
+    else:
+        db.close()
+        return True
+
+#changes the nickname of a member of a team  
 def editnick(teamid,member,nickname):
     f = "app.db"
     db = sqlite3.connect(f)
@@ -102,6 +119,7 @@ def editnick(teamid,member,nickname):
     db.commit()
     db.close()
 
+#returns all the teams of a user   
 def getteams(username):
     f = "app.db"
     db = sqlite3.connect(f)
@@ -112,6 +130,7 @@ def getteams(username):
     db.close()
     return result
 
+#removes a person's permission to edit a piece
 def removepermission(user,pieceid):
     f = "app.db"
     db = sqlite3.connect(f)
@@ -120,10 +139,39 @@ def removepermission(user,pieceid):
     db.commit()
     db.close()
 
+# adds a formation    
 def addform(pieceid, num, user, x, y, time, tag):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('INSERT INTO formations VALUES("%d", "%d", "%s", "%d", "%d", "%d", "%s");' %(pieceid, num, user, x, y, time, tag))
+    db.commit()
+    db.close()
+
+#return all the pieces of a team
+def getpieces(teamid):
+    f = "app.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('SELECT * FROM pieces WHERE teamid = "%d";' %(teamid))
+    db.commit()
+    db.close()
+    result= c.fetchall()
+    return result
+
+# allows you to change the dancer, x and y cord, time and tag of a formation with its id and pieceid
+def editform(pieceid, num, dancer, x, y, time, tag):
+     f = "app.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('UPDATE formations SET dancer = "%s", x = "%d", y = "%d", time ="%d", tag = "%s" WHERE id = "%d" AND formid = "%d" );' %(dancer, x, y, time, tag, pieceid))
+    db.commit()
+    db.close()
+
+def delform(pieceid, num, dancer, x, y, time, tag)
+     f = "app.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('DELETE * WHERE dancer = "%s" AND x = "%d" AND y = "%d" AND time ="%d" AND tag = "%s" AND id = "%d" AND formid = "%d" );' %(dancer, x, y, time, tag, pieceid))
     db.commit()
     db.close()
