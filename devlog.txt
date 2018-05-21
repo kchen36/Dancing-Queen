@@ -31,3 +31,6 @@ bugfix
 WongE -- 2018-05-21 14:31:07
 bugfix and added gitignore
 
+WongE -- 2018-05-21 14:36:18
+setting up droplet in progress
+
