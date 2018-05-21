@@ -1,5 +1,5 @@
 #importing flask submodules
-from flask import Flask, render_template, redirect, url_for, session, flash
+from flask import Flask, render_template, redirect, url_for, session, flash, request
 #importing our own modules
 from utils import db, auth
 #importing os for urandom()
@@ -59,6 +59,7 @@ def register():
         else:
             flash('Registration error: Username is already in use.')
             return render_template('signin.html')
+    return redirect('index')
 
 @app.route('/teams')
 def teams():
