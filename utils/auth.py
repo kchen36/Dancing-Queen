@@ -1,5 +1,5 @@
 import os, hashlib
-from flask import session
+from flask import session, render_template
 from utils import db
 
 #encrypts passwords
@@ -37,3 +37,18 @@ def login(username, password):
 def logout():
     if logged_in():
         session.pop('username')
+
+def in_session(function):
+	"""
+	decorator
+	
+	if user is logged in, return <function>.
+	else, return render_template('index.html')
+	"""
+	def wrapper():
+		if(logged_in()):
+			return function()
+		else:
+			return render_template('index.html')
+	wrapper.func_name = function.func_name
+	return wrapper

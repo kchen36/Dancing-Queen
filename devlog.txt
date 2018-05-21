@@ -25,3 +25,12 @@ apache
 chenK -- 2018-05-20 20:32:48
 wrote addform, removepermission,getteams, addpermission and editnickname
 
+WongE -- 2018-05-21 14:16:35
+bugfix
+
+WongE -- 2018-05-21 14:31:07
+bugfix and added gitignore
+
+WongE -- 2018-05-21 14:36:18
+setting up droplet in progress
+
