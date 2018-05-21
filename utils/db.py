@@ -94,4 +94,36 @@ def addpermission(pieceid, username):
     db.commit()
     db.close()
 
-    
+def editnick(teamid,member,nickname):
+    f = "app.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('UPDATE members SET nickname = "%s" WHERE username = "%s" AND id = "%d";' %(nickname, username, id))
+    db.commit()
+    db.close()
+
+def getteams(username):
+    f = "app.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('SELECT * FROM members WHERE username ="%s"')
+    result = c.fetchall()
+    db.commit()
+    db.close()
+    return result
+
+def removepermission(user,pieceid):
+     f = "app.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    C.execute('DELETE * FROM permissions WHERE user = "%s" AND id = "%d"' %(user, id))
+    db.commit()
+    db.close()
+
+def addform(pieceid, num, user, x, y, time, tag):
+    f = "app.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('INSERT INTO formations VALUES("%d", "%d", "%s", "%d", "%d", "%d", "%s");' %(pieceid, num, user, x, y, time, tag))
+    db.commit()
+    db.close()

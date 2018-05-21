@@ -22,3 +22,6 @@ added mroe templates
 WongE -- 2018-05-18 02:52:02
 apache
 
+chenK -- 2018-05-20 20:32:48
+wrote addform, removepermission,getteams, addpermission and editnickname
+
