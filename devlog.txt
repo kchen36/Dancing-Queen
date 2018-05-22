@@ -40,3 +40,6 @@ Wrote del and edit form, get pieces and remove permission and checkpermission
 WongE -- 2018-05-22 14:20:30
 started on formations.js
 
+WongE -- 2018-05-22 14:46:42
+created formation json format
+
