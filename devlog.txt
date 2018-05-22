@@ -37,3 +37,6 @@ setting up droplet in progress
 chenK -- 2018-05-21 14:48:37
 Wrote del and edit form, get pieces and remove permission and checkpermission
 
+WongE -- 2018-05-22 14:20:30
+started on formations.js
+
