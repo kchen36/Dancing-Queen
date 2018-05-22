@@ -43,3 +43,6 @@ started on formations.js
 WongE -- 2018-05-22 14:46:42
 created formation json format
 
+ahmedF -- 2018-05-22 14:49:41
+added some jinja stuff
+

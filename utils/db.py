@@ -161,15 +161,15 @@ def getpieces(teamid):
 
 # allows you to change the dancer, x and y cord, time and tag of a formation with its id and pieceid
 def editform(pieceid, num, dancer, x, y, time, tag):
-     f = "app.db"
+    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('UPDATE formations SET dancer = "%s", x = "%d", y = "%d", time ="%d", tag = "%s" WHERE id = "%d" AND formid = "%d" );' %(dancer, x, y, time, tag, pieceid))
     db.commit()
     db.close()
 
-def delform(pieceid, num, dancer, x, y, time, tag)
-     f = "app.db"
+def delform(pieceid, num, dancer, x, y, time, tag):
+    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('DELETE * WHERE dancer = "%s" AND x = "%d" AND y = "%d" AND time ="%d" AND tag = "%s" AND id = "%d" AND formid = "%d" );' %(dancer, x, y, time, tag, pieceid))
