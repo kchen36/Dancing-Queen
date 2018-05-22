@@ -1,14 +1,19 @@
-<!DOCTYPE html>
-<head>
-  <title>Sign Up</title>
-</head>
+{% extends 'index.html' %}
+
+{% block customStyle %}
+{% endblock %}
+
+{% block content %}
 <body>
-  Please sign up below!
-  <form action="">
-    Username: <input type="text" name="user"><br>
-    Password: <input type="password" name="password"><br>
-    Name / Nickname: <input type="text" name="name"><br>
-    <input type="submit" value="Submit">
-  </form>
+  <div class="container" style="margin:0">
+    Please sign up below!
+    <form action="">
+      Username: <input type="text" name="user"><br>
+      Password: <input type="password" name="password"><br>
+      Name / Nickname: <input type="text" name="name"><br>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
 </body>
+{% endblock %}
 </html>

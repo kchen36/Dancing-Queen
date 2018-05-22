@@ -6,18 +6,21 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  {% block customStyle %}
   <style>
     .body {
         padding-top: 30px;
     }
   </style>
+  {% endblock %}
+  
 </head>
 
 <body>
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Home</a>
+      <a class="navbar-brand" href="/">Home</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>  Log In</a></li>
@@ -25,14 +28,23 @@
     </ul>
   </div>
   </nav>
+  <div id="flashed_messages">
+    {% for message in get_flashed_messages() %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  </div>
+  
+  {% block content %}
   <div class="body">
-  <h1 class="text-center"> Welcome to Dancing Queen! </h1>
-  <br>
-  <h3 class="text-center">Use this website to share and view formations with the rest of your dance team.</h3> <br>
-  <h4 class="text-center"><span class="glyphicon glyphicon-cloud-upload"></span> Use our easy-to-use formation system to create and post formations.</h4><br>
-  <h4 class="text-center"><span class="glyphicon glyphicon-tags"></span> Neatly organize the many different teams you are in.</h4><br>
-  <h4 class="text-center"><span class="glyphicon glyphicon-user"></span> Keep track of the members in your teams.</h4><br>
-  <hr>
+    <h1 class="text-center"> Welcome to Dancing Queen! </h1>
+    <br>
+    <h3 class="text-center">Use this website to share and view formations with the rest of your dance team.</h3> <br>
+    <h4 class="text-center"><span class="glyphicon glyphicon-cloud-upload"></span> Use our easy-to-use formation system to create and post formations.</h4><br>
+    <h4 class="text-center"><span class="glyphicon glyphicon-tags"></span> Neatly organize the many different teams you are in.</h4><br>
+    <h4 class="text-center"><span class="glyphicon glyphicon-user"></span> Keep track of the members in your teams.</h4><br>
+    <hr>
   </div>
 </body>
+  {% endblock %}
+
 </html>
