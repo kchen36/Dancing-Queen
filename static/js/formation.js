@@ -1,5 +1,6 @@
 /*
 takes a json with formation data as input and loads data
+this was written with knowledge that each tab is 4 spaces
 
 the json is formatted like this:
 {
