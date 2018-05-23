@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>Welcome!</title>
+  <title>{% block title %} Welcome! {% endblock %}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -22,10 +22,12 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="/">Home</a>
     </div>
+    {% block navItems %} 
     <ul class="nav navbar-nav navbar-right">
       <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>  Log In</a></li>
       <li><a href="/register"><span class="glyphicon glyphicon-pencil"></span>  Sign Up</a></li>
     </ul>
+    {% endblock %}
   </div>
   </nav>
   <div id="flashed_messages">

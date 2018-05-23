@@ -62,26 +62,25 @@ def register():
 
 @app.route('/teams')
 def teams():
-    render_template('teams.html')
+    return render_template('teams.html')
 
 @app.route('/create_team')
-@auth.in_session
 def create_team():
-    render_template('create_team.html')
+    return render_template('create_team.html')
 
 @app.route('/pieces')
 def pieces():
-    render_template('pieces.html')
+    return render_template('pieces.html')
 
 @app.route('/create_piece')
 @auth.in_session
 def create_piece():
-    render_template('create_piece.html')
+    return render_template('create_piece.html')
 
 @app.route('/edit')
 @auth.in_session
 def view_piece():
-    render_template('view_piece.html')
+    return render_template('view_piece.html')
 
 
     
