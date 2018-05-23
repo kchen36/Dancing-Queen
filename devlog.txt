@@ -53,3 +53,6 @@ wrote some helper functions and started testing the db functions
 WongE -- 2018-05-22 23:33:56
 minor changes to file structure and made formation.html
 
+parkP -- 2018-05-23 14:10:34
+edited index.html and login.html
+
