@@ -62,3 +62,6 @@ tested more functions fixed typos
 parkP -- 2018-05-23 14:51:06
 edited templates to use base.html
 
+WongE -- 2018-05-23 14:52:35
+prepared test html file for formation.js and a test json
+
