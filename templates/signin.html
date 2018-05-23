@@ -1,19 +1,46 @@
-{% extends 'index.html' %}
+{% extends "base.html" %}
 
-{% block customStyle %}
+{% block head %}
+<title>Sign up</title>
+  <style>
+    .body {
+        padding-top: 70px;
+        margin: auto;
+    }
+    #box {
+    border-radius: 25px;
+    background: #F77373;
+    padding-left: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right: 50px;
+    }
+  </style>
 {% endblock %}
+
+  {% block navbar %}
+      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>  Log In</a></li>
+      <li><a href="/register"><span class="glyphicon glyphicon-pencil"></span>  Sign Up</a></li>
+      {% endblock %}
 
 {% block content %}
-<body>
-  <div class="container" style="margin:0">
-    Please sign up below!
-    <form action="">
-      Username: <input type="text" name="user"><br>
-      Password: <input type="password" name="password"><br>
-      Name / Nickname: <input type="text" name="name"><br>
-      <input type="submit" value="Submit">
-    </form>
+  <div class="body" style="display: table">
+    <div id="box">
+  <h4><b>Sign In<b></h4> <br>
+  <form action="">
+    <div class="form-group">
+      <label for="user"> Username: </label>
+      <input type="text" class="form-control" id="user">
+    </div>
+    <div class="form-group">
+      <label for="name"> Full Name: </label>
+      <input type="text" class="form-control" id="name">
+    <div class="form-group">
+      <label for="pass"> Password: </label>
+      <input type="text" class="form-control" id="pass">
+    </div>
+    <input type="submit" value="Submit">
+  </form>
   </div>
-</body>
+  </div>
 {% endblock %}
-</html>

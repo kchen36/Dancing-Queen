@@ -24,8 +24,8 @@ def adduser(user, password):
     db = sqlite3.connect(f)
     c = db.cursor()
     if getpass(user) is None:
-	password = hashlib.sha224(password).hexdigest()
-	c.execute('INSERT INTO users VALUES("%s", "%s");' %(user, password))
+        password = hashlib.sha224(password).hexdigest()
+        c.execute('INSERT INTO users VALUES("%s", "%s");' %(user, password))
         db.commit()
         db.close()
         return True
@@ -70,7 +70,7 @@ def getname(teamid):
     db.commit()
     db.close()
     return result[0][0]
-print getname(0)
+
 #adds a person to a team and adds a nickname
 def addmember(teamid, name, nick):
     f = "app.db"
@@ -81,13 +81,15 @@ def addmember(teamid, name, nick):
     db.close()
 
 #gets a nickname of a person from a specific team id
-def getnick(name,teamid):
+def getnick(teamid, name):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('SELECT nickname FROM members WHERE name = "%s" and id = "%d");' %(name, teamid))
+    c.execute('SELECT nickname FROM members WHERE name = "%s" AND id = "%d";' %(name, teamid))
+    result = c.fetchall()
     db.commit()
     db.close()
+    return result[0][0]
 
 #changes the password of a user
 def changepass(username, password):
@@ -113,7 +115,7 @@ def checkpermission(pieceid, username):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('SELECT * FROM permissions WHERE id = "%d" AND user ="%d";' %(pieceid, username))
+    c.execute('SELECT * FROM permissions WHERE id = "%d" AND user ="%s";' %(pieceid, username))
     result = c.fetchall()
     if result == []:
         db.close()
@@ -121,13 +123,13 @@ def checkpermission(pieceid, username):
     else:
         db.close()
         return True
-
+    
 #changes the nickname of a member of a team  
 def editnick(teamid,member,nickname):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('UPDATE members SET nickname = "%s" WHERE username = "%s" AND id = "%d";' %(nickname, username, id))
+    c.execute('UPDATE members SET nickname = "%s" WHERE name = "%s" AND id = "%d";' %(nickname, member, teamid))
     db.commit()
     db.close()
 
@@ -136,12 +138,12 @@ def getteams(username):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('SELECT * FROM members WHERE username ="%s"')
+    c.execute('SELECT id FROM members WHERE name ="%s"')
     result = c.fetchall()
     db.commit()
     db.close()
     return result
-
+print getteams("bob")
 #removes a person's permission to edit a piece
 def removepermission(user,pieceid):
     f = "app.db"
