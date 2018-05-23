@@ -14,11 +14,6 @@
       <li><a href="/register"><span class="glyphicon glyphicon-pencil"></span>  Sign Up</a></li>
       {% endblock %}
 
-    {% block navbar %} 
-      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>  Log In</a></li>
-      <li><a href="/register"><span class="glyphicon glyphicon-pencil"></span>  Sign Up</a></li>
-    {% endblock %}
-
     {% for message in get_flashed_messages() %}
       <p>{{ message }}</p>
     {% endfor %}
@@ -36,4 +31,3 @@
 </body>
   {% endblock %}
 
-</html>
