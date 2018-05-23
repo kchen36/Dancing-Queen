@@ -56,3 +56,6 @@ minor changes to file structure and made formation.html
 parkP -- 2018-05-23 14:10:34
 edited index.html and login.html
 
+chenK -- 2018-05-23 14:48:19
+tested more functions fixed typos
+
