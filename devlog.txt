@@ -71,3 +71,6 @@ deploying
 WongE -- 2018-05-24 01:23:16
 deployment successful but there is a db error
 
+WongE -- 2018-05-24 14:52:04
+worked on deployment bugs and worked on test formation json
+
