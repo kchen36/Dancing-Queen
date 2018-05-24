@@ -101,5 +101,33 @@ testJson = {
 														"philip":"extra long tag for testing",
 													},
 								},
+								{
+									"timeTillNext" :1,
+									"userMovements":{
+														"edmond":{
+																	"xcor":2,
+																	"ycor":2,
+																 },
+														"kerry" :{
+																	"xcor":3,
+																	"ycor":1,
+																 },
+														"fabiha":{
+																	"xcor":9,
+																	"ycor":1,
+																 },
+														"philip":{
+																	"xcor":8,
+																	"ycor":5,
+																 },
+													},
+									"userTags"     :{
+														"edmond":"second tag0",
+														"kerry" :"second tag1",
+														"fabiha":"second tag2",
+														"philip":"second tag3",
+													},
+								},
+
 							],
 		   }
