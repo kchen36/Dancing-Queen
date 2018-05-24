@@ -68,3 +68,6 @@ prepared test html file for formation.js and a test json
 WongE -- 2018-05-24 01:08:23
 deploying
 
+WongE -- 2018-05-24 01:23:16
+deployment successful but there is a db error
+
