@@ -4,8 +4,11 @@ from flask import Flask, render_template, redirect, url_for, session, flash, req
 from utils import db, auth
 #importing os for urandom()
 import os, json
+from os import path
 
 app = Flask(__name__)
+
+DIR = path.dirname(__file__)
 
 def make_secret_key():
     return os.urandom(32)
@@ -85,5 +88,5 @@ def view_piece():
 
     
 if __name__ == '__main__':
-    app.debug = True
+    app.debug = False
     app.run()
