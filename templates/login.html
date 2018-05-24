@@ -26,17 +26,18 @@
 {% block content %}  
   <div class="body" style="display: table">
     <div id="box">
-  <h4><b>Log In<b></h4> <br>
+  <h4 style="text-align:center"><b>Log In<b></h4> <br>
   <form action="">
     <div class="form-group">
       <label for="user"> Username: </label>
-      <input type="text" class="form-control" id="user">
+      <input type="text" class="form-control" id="user" style="width:300px">
     </div>
     <div class="form-group">
       <label for="pass"> Password: </label>
-      <input type="text" class="form-control" id="pass">
+      <input type="password" class="form-control" id="pass" style="width:300px">
     </div>
-    <input type="submit" value="Submit">
+    <br>
+    <input type="button" class="btn btn-primary btn-lg" style="width:300px" value="LOG IN"></input>
   </form>
   </div>
   </div>
