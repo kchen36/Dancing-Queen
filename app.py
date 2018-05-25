@@ -76,7 +76,7 @@ def pieces():
     return render_template('pieces.html')
 
 @app.route('/create_piece')
-@auth.in_session
+#@auth.in_session
 def create_piece():
     return render_template('create_piece.html')
 
@@ -89,4 +89,4 @@ def view_piece():
     
 if __name__ == '__main__':
     app.debug = False
-    app.run()
+    app.run(host='127.0.0.1',port=5001)
