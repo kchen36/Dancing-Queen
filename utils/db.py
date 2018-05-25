@@ -1,5 +1,6 @@
 import sqlite3
 import hashlib
+from os import path
 
 #creates all the tables only if they do not exist
 f = "app.db"
@@ -10,7 +11,7 @@ c.execute('CREATE TABLE IF NOT EXISTS teams (name STRING, id INTEGER PRIMARY KEY
 c.execute('CREATE TABLE IF NOT EXISTS members (id INTEGER, leader BIT,name STRING, nickname STRING);')
 c.execute('CREATE TABLE IF NOT EXISTS permissions(id INTEGER, user STRING);')
 c.execute('CREATE TABLE IF NOT EXISTS pieces(teamid INTEGER, pieceid INTEGER PRIMAY KEY, song STRING, path STRING, name STRING, length INTEGER, width INTEGER, rows INTEGER, columns INTEGER, privacy BIT);')
-c.execute('CREATE TABLE IF NOT EXISTS formations(id INTEGER,formid INTEGER, dancer STRING, x INTEGER, y INTEGER, time, INTEGER, tag STRING);')
+c.execute('CREATE TABLE IF NOT EXISTS formations(id INTEGER,formid INTEGER, dancer STRING, x INTEGER, y INTEGER, time INTEGER, tag STRING);')
 db.close()
 
 #hash password
@@ -138,18 +139,18 @@ def getteams(username):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('SELECT id FROM members WHERE name ="%s"')
+    c.execute('SELECT id FROM members WHERE name ="%s"' %(username))
     result = c.fetchall()
     db.commit()
     db.close()
     return result
-print getteams("bob")
+
 #removes a person's permission to edit a piece
-def removepermission(user,pieceid):
+def removepermission(pieceid,user):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    C.execute('DELETE * FROM permissions WHERE user = "%s" AND id = "%d"' %(user, id))
+    c.execute('DELETE FROM permissions WHERE user = "%s" AND id = "%d"' %(user, pieceid))
     db.commit()
     db.close()
 
@@ -168,9 +169,9 @@ def getpieces(teamid):
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('SELECT * FROM pieces WHERE teamid = "%d";' %(teamid))
+    result = c.fetchall()
     db.commit()
     db.close()
-    result= c.fetchall()
     return result
 
 # allows you to change the dancer, x and y cord, time and tag of a formation with its id and pieceid
@@ -178,7 +179,7 @@ def editform(pieceid, num, dancer, x, y, time, tag):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('UPDATE formations SET dancer = "%s", x = "%d", y = "%d", time ="%d", tag = "%s" WHERE id = "%d" AND formid = "%d" );' %(dancer, x, y, time, tag, pieceid))
+    c.execute('UPDATE formations SET dancer = "%s", x = "%d", y = "%d", time ="%d", tag = "%s" WHERE id = "%d" AND formid = "%d" ;' %(dancer, x, y, time, tag, pieceid, num))
     db.commit()
     db.close()
 
@@ -186,16 +187,28 @@ def delform(pieceid, num, dancer, x, y, time, tag):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('DELETE * WHERE dancer = "%s" AND x = "%d" AND y = "%d" AND time ="%d" AND tag = "%s" AND id = "%d" AND formid = "%d" );' %(dancer, x, y, time, tag, pieceid))
+    c.execute('DELETE FROM formations WHERE dancer = "%s" AND x = "%d" AND y = "%d" AND time ="%d" AND tag = "%s" AND id = "%d" AND formid = "%d" ;' %(dancer, x, y, time, tag, pieceid,num))
     db.commit()
     db.close()
-
-def addpiece(teamid, pieceid, song, path, name, length, width, rows, columns, privacy):
+def addpiece(teamid, song, path, name, length, width, rows, columns, privacy):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('INSERT INTO pieces VALUES("%d", "%d","%s", "%s" , "%s", "%d", "%d", "%d", "%d", "%d");' %(teamid, pieceid, song, path, name, length, width, rows, columns, privacy) )
+    number = 0
+    c.execute('SELECT MAX(id) FROM teams;')
+    result = c.fetchall()
+    if result[0][0] != None:
+        number = result[0][0] + 1
+    c.execute('INSERT INTO pieces VALUES("%d", "%d","%s", "%s" , "%s", "%d", "%d", "%d", "%d", "%d");' %(teamid, number, song, path, name, length, width, rows, columns, privacy) )
     db.commit()
     db.close()
 
+def getform(pieceid):
+    f = "app.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('SELECT * FROM formations WHERE id = "%d";' %(pieceid))
+    result = c.fetchall()
+    db.close()
+    return result
 

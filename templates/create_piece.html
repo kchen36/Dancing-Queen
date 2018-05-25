@@ -1,31 +1,52 @@
-<!DOCTYPE html>
-<head>
-  <title>Create Piece</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+{% extends 'base.html' %}
 
+{% block head %}
+<title>Create Piece</title>
+
+{% endblock %}
+
+{% block navbar %}
+<li><a href="#">Create Team</a></li>
+<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+{% endblock %}
+
+
+{% block content %}
 <body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Home</a>
+  <div class="container">
+    <h1> Create a new piece </h1>
+    <form>
+      <div class="form-group">
+	<div class="row">
+	  <div class="col-lg-3">
+	    Name of piece: <input class="form-control" type="text" name="piece_name"><br><br>
+	  </div>
+	</div>
+      </div>
+      <div class="form-group">
+	<div class="row">
+	  <div class="col-lg-3">
+	    Upload Audio:  <input type="file" class="custom-file-input" id="music"><br><br>
+	  </div>
+	</div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-lg-9">
+	<svg style="border:1px solid black"id="svg_id" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+	</svg>
+      </div>
+      <div class="col-lg-3">
+	<button class="btn" id="play"> Play </button>
+	<button class="btn" id="formation"> + </button>
+	<button class="btn" id="delete"> Delete </button>
+      </div>
     </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">Create Team</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
-    </ul>
   </div>
-</nav>
-  
-You can create a piece here. <br>
-<form action="">
-Piece Name: <input type="text" name="name"><br>
-Add Music File: <input type="file" name="music" accept="audio/*">
-<input type="submit" value="CREATE">
-</form>
+
+  <script src="https://d3js.org/d3.v5.js"></script>
+  <script src="index.js"></script>
+
 </body>
-</html>
+
+{% endblock %}
