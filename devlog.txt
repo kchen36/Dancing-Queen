@@ -76,6 +76,9 @@ worked on deployment bugs and worked on test formation json
 
 parkP -- 2018-05-24 14:48:44
 edited login and signin html
+
 chenK -- 2018-05-25 14:42:00
 all functions for db written and tested
 
+ahmedF -- 2018-05-28 02:07:47
+added the stage setup, there may be some organizational error, i'm out and on a borrowed laptop and on NotePad so I'll fix it tomorrow
