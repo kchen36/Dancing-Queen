@@ -71,3 +71,38 @@ for (var i = users.length-1; i >= 0; i--) {
 	text.textContent = users[i].username;
 	s.appendChild(text);
 }
+
+//play button just jumps to next formation
+var play = function(){
+	for(var i = 0; i < s.children.length; i+=2){
+		var x = data[0].formations[1].userMovements[i/2].xcor * 100;
+		var y = data[0].formations[1].userMovements[i/2].ycor * 100;
+		s.children[i].setAttribute("cx", x);
+		s.children[i].setAttribute("cy", y);
+		s.children[i+1].setAttribute("x", x);
+		s.children[i+1].setAttribute("y", y);
+	}
+}
+
+playBtn.addEventListener("click", play)
+
+
+
+//d3 stuff to replace all this eventually
+var body = d3.select(".container");
+
+var svg = body.append("svg")
+	      .attr("width", width)
+	      .attr("height", height)
+	      .style("border","1px solid black");
+
+var circles = svg.selectAll("circle")
+		 .data(data[0].users)
+		 .enter()
+		 .append("circle")
+
+var circleAttributes = circles
+			.attr("cx", width/2)
+			.attr("cy", height/2)
+			.attr("r", 30)
+			.style("fill", function(d) { d.color; });
