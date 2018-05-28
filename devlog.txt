@@ -85,3 +85,6 @@ added the stage setup, there may be some organizational error, i'm out and on a 
 chenK -- 2018-05-28 15:39:22
 made a path for db
 
+ahmedF -- 2018-05-28 18:21:19
+stage steup works, working on implementing d3
+
