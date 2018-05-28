@@ -82,3 +82,6 @@ all functions for db written and tested
 
 ahmedF -- 2018-05-28 02:07:47
 added the stage setup, there may be some organizational error, i'm out and on a borrowed laptop and on NotePad so I'll fix it tomorrow
+chenK -- 2018-05-28 15:39:22
+made a path for db
+

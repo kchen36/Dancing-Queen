@@ -2,8 +2,10 @@ import sqlite3
 import hashlib
 from os import path
 
+f 
+
 #creates all the tables only if they do not exist
-f = "app.db"
+f =  path.firname(__file__) + "/../data/app.db"
 db = sqlite3.connect(f)
 c = db.cursor()
 c.execute('CREATE TABLE IF NOT EXISTS users (username STRING PRIMARY KEY, password STRING);')
@@ -21,7 +23,6 @@ def encrypt(password):
 #adds user to users table and returns true if sucessful else returns false
 def adduser(user, password):
     password = encrypt(password)
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     if getpass(user) is None:
@@ -35,7 +36,6 @@ def adduser(user, password):
 
 #returns the password of a user if the username exist
 def getpass(user):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('SELECT password FROM users WHERE username= "%s";' %(user))
@@ -49,7 +49,6 @@ def getpass(user):
 
 #creates a team and the creator is the leader
 def createteam(name,leader,nickname):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     number = 0
@@ -63,7 +62,6 @@ def createteam(name,leader,nickname):
     db.close()
     
 def getname(teamid):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('SELECT name FROM teams WHERE id = "%d";' %(teamid))
@@ -74,7 +72,6 @@ def getname(teamid):
 
 #adds a person to a team and adds a nickname
 def addmember(teamid, name, nick):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('INSERT INTO members VALUES("%d", 0, "%s", "%s");' %(teamid, name, nick))
@@ -83,7 +80,6 @@ def addmember(teamid, name, nick):
 
 #gets a nickname of a person from a specific team id
 def getnick(teamid, name):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('SELECT nickname FROM members WHERE name = "%s" AND id = "%d";' %(name, teamid))
@@ -95,7 +91,6 @@ def getnick(teamid, name):
 #changes the password of a user
 def changepass(username, password):
     password = encrypt(password)
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('UPDATE users SET password = "%s" WHERE username = "%s";' %(password, username))
@@ -104,7 +99,6 @@ def changepass(username, password):
 
 #allows a person to edit a piece
 def addpermission(pieceid, username):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('INSERT INTO permissions VALUES("%d", "%s");' %(pieceid, username))
@@ -113,7 +107,6 @@ def addpermission(pieceid, username):
 
 #checks if a person has permission to a piece returns True/False
 def checkpermission(pieceid, username):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('SELECT * FROM permissions WHERE id = "%d" AND user ="%s";' %(pieceid, username))
@@ -127,7 +120,6 @@ def checkpermission(pieceid, username):
     
 #changes the nickname of a member of a team  
 def editnick(teamid,member,nickname):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('UPDATE members SET nickname = "%s" WHERE name = "%s" AND id = "%d";' %(nickname, member, teamid))
@@ -136,7 +128,6 @@ def editnick(teamid,member,nickname):
 
 #returns all the teams of a user   
 def getteams(username):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('SELECT id FROM members WHERE name ="%s"' %(username))
@@ -147,7 +138,6 @@ def getteams(username):
 
 #removes a person's permission to edit a piece
 def removepermission(pieceid,user):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('DELETE FROM permissions WHERE user = "%s" AND id = "%d"' %(user, pieceid))
@@ -156,7 +146,6 @@ def removepermission(pieceid,user):
 
 # adds a formation    
 def addform(pieceid, num, user, x, y, time, tag):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('INSERT INTO formations VALUES("%d", "%d", "%s", "%d", "%d", "%d", "%s");' %(pieceid, num, user, x, y, time, tag))
@@ -165,7 +154,6 @@ def addform(pieceid, num, user, x, y, time, tag):
 
 #return all the pieces of a team
 def getpieces(teamid):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('SELECT * FROM pieces WHERE teamid = "%d";' %(teamid))
@@ -176,7 +164,6 @@ def getpieces(teamid):
 
 # allows you to change the dancer, x and y cord, time and tag of a formation with its id and pieceid
 def editform(pieceid, num, dancer, x, y, time, tag):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('UPDATE formations SET dancer = "%s", x = "%d", y = "%d", time ="%d", tag = "%s" WHERE id = "%d" AND formid = "%d" ;' %(dancer, x, y, time, tag, pieceid, num))
@@ -184,14 +171,13 @@ def editform(pieceid, num, dancer, x, y, time, tag):
     db.close()
 
 def delform(pieceid, num, dancer, x, y, time, tag):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('DELETE FROM formations WHERE dancer = "%s" AND x = "%d" AND y = "%d" AND time ="%d" AND tag = "%s" AND id = "%d" AND formid = "%d" ;' %(dancer, x, y, time, tag, pieceid,num))
     db.commit()
     db.close()
+    
 def addpiece(teamid, song, path, name, length, width, rows, columns, privacy):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     number = 0
@@ -204,7 +190,6 @@ def addpiece(teamid, song, path, name, length, width, rows, columns, privacy):
     db.close()
 
 def getform(pieceid):
-    f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('SELECT * FROM formations WHERE id = "%d";' %(pieceid))
