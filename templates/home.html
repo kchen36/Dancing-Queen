@@ -1,28 +1,21 @@
-<!DOCTYPE html>
-<head>
-  <title>Home</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+{% extends "base.html" %}
 
-<body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Home</a>
-    </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">Create Team</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
-    </ul>
-  </div>
-</nav>
+{% block head %}
+<title>Home</title>
+<style> </style>
+{% endblock %}
+
+{% block navbar %}
+	<li><a href="/create_team">Create Team</a></li>
+	<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+{% endblock %}
   
-Welcome user! This is your home page. Soon. You will be able to view the teams you are in. <br>
-The buttons below will allow you to view teams. <br>
-  <button type="button"> View </button>
+{% block content %}  
+<div class="container">
+    Welcome user! This is your home page. Soon. You will be able to view the teams you are in. <br>
+    The button below will allow you to create a new piece. <br><br>
+    <a href="/create_piece" class="btn" > View </a>
+
+  </div>
 </body>
-</html>
+{% endblock %}

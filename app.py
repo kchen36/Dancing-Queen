@@ -68,6 +68,7 @@ def teams():
     return render_template('teams.html')
 
 @app.route('/create_team')
+@auth.in_session
 def create_team():
     return render_template('create_team.html')
 
@@ -76,7 +77,7 @@ def pieces():
     return render_template('pieces.html')
 
 @app.route('/create_piece')
-#@auth.in_session
+@auth.in_session
 def create_piece():
     return render_template('create_piece.html')
 
@@ -84,7 +85,6 @@ def create_piece():
 @auth.in_session
 def view_piece():
     return render_template('view_piece.html')
-
 
     
 if __name__ == '__main__':

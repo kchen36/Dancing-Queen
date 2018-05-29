@@ -88,7 +88,7 @@ var play = function(){
 playBtn.addEventListener("click", play)
 
 
-
+/*
 //d3 stuff to replace all this eventually
 var body = d3.select(".container");
 
@@ -107,3 +107,4 @@ var circleAttributes = circles
     .attr("cy", height/2)
     .attr("r", 30)
     .style("fill", function(d) { console.log(d.users); });
+*/

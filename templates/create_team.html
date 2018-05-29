@@ -1,19 +1,17 @@
-{% extends 'index.html' %}
+{% extends "base.html" %}
 
-{% block title %} Create Team {% endblock %}
-
-{% block customStyle %}
+{% block head %}
+<title>Home</title>
+<style> </style>
 {% endblock %}
 
-
-{% block content %}
+{% block navbar %}
+  <li><a href="/create_team">Create Team</a></li>
+  <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+{% endblock %}
+  
+{% block content %}  
  <body>
-  {% block navItem %}
-  <ul class="nav navbar-nav navbar-right">
-    <li><a href="#">Create Team</a></li>
-    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
-  </ul>
-  {% endblock %}
   
   You can create a team here. <br>
   <form action="">

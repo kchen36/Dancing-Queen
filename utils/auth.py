@@ -1,6 +1,6 @@
 import os, hashlib
 from flask import session, render_template
-from utils import db
+import db
 
 #encrypts passwords
 def encrypt(password):
@@ -10,6 +10,8 @@ def encrypt(password):
 def new_user(username, password):
     return db.adduser(username, encrypt(password))
 
+#print "new user: ", new_user('Bob', 'pass')
+
 def update_pass(username, password):
     return db.change_password(username, encrypt(password))
 
@@ -17,9 +19,13 @@ def update_pass(username, password):
 def verify(username, password):
     return encrypt(password) == db.get_password(username)
 
+#print "verify: ", verify('Bob', 'pass')
+
 #checks username
 def user_exists(username):
     return db.get_password(username) is not None
+
+#print "user exists: ", user_exists('Bob')
 
 #checks to see if logged in
 def logged_in():

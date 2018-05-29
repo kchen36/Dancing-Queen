@@ -17,23 +17,8 @@ db.close()
 def encrypt(password):
     return hashlib.sha224(password).hexdigest()
 
-#adds user to users table and returns true if sucessful else returns false
-def adduser(user, password):
-    password = encrypt(password)
-    f = "app.db"
-    db = sqlite3.connect(f)
-    c = db.cursor()
-    if getpass(user) is None:
-        password = hashlib.sha224(password).hexdigest()
-        c.execute('INSERT INTO users VALUES("%s", "%s");' %(user, password))
-        db.commit()
-        db.close()
-        return True
-    db.close()
-    return False
-
 #returns the password of a user if the username exist
-def getpass(user):
+def get_password(user):
     f = "app.db"
     db = sqlite3.connect(f)
     c = db.cursor()
@@ -45,6 +30,30 @@ def getpass(user):
     else:
         db.close()
         return result[0][0]
+
+#print get_password('Bob')
+
+#adds user to users table and returns true if sucessful else returns false
+#password encrypted in auth.py
+def adduser(user, password):
+    f = "app.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('SELECT * FROM users;')
+    if c.fetchall() == []:
+        c.execute('INSERT INTO users VALUES("%s", "%s");' %(user, password))
+        db.commit()
+        db.close()
+        return True        
+    if get_password(user) is None:
+        c.execute('INSERT INTO users VALUES("%s", "%s");' %(user, password))
+        db.commit()
+        db.close()
+        return True
+    db.close()
+    return False
+
+#adduser('u', 'password')
 
 #creates a team and the creator is the leader
 def createteam(name,leader,nickname):
