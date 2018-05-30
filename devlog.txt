@@ -94,3 +94,6 @@ login and sign up works, demo user: Bob pass: pass
 WongE -- 2018-05-30 14:59:47
 rewrote formation.js using d3
 
+parkP -- 2018-05-30 14:51:08
+made flash messages prettier
+
