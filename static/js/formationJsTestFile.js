@@ -85,48 +85,59 @@ testJson = {
 							],
 		   }
 /*
-takes a json with formation data as input and loads data
-this was written with knowledge that each tab is 4 spaces
+  takes a json with formation data as input and loads data
+  this was written with knowledge that each tab is 4 spaces
 
-the json is formatted like this:
-{
-	"pieceName":"<pieceName>",
-	"stageSize":{
-					"length":<length>,
-					"width" :<width>,
-				},
-	"songInfo":{
-					"songName"  :"<songName>",
-					"songLength":<song length in seconds>,
-			   },
-	"users":[
-				{
-					"username":"<username>",
-					"color"   :"<color>",
-				},
-				{
-					...
-			 	},
-				...
-			],
-	"formations":[
-				{
-					"timeTillNext" :<seconds till next frame>,
-					"userMovements":{ "<username>":{ "xcor":<xcor>,
-														"ycor":<ycor>,
-													 }
-										...
-									},
-					"userTags"     :{
-										"<username>":"tag",
-										...
-									},
-				},
-				...
-			],
-}
+  the json is formatted like this:
+  {
+  "pieceName":"<pieceName>",
+  "stageSize":{
+  "length":<length>,
+  "width" :<width>,
+  },
+  "songInfo":{
+  "songName"  :"<songName>",
+  "songLength":<song length in seconds>,
+  },
+  "users":[
+  {
+  "username":"<username>",
+  "color"   :"<color>",
+  },
+  {
+  ...
+  },
+  ...
+  ],
+  "formations":[
+  {
+  "timeTillNext" :<seconds till next frame>,
+  "userMovements":{ "<username>":{ "xcor":<xcor>,
+  "ycor":<ycor>,
+  }
+  ...
+  },
+  "userTags"     :{
+  "<username>":"tag",
+  ...
+  },
+  },
+  ...
+  ],
+  }
 */
+
+/*
+
+old code moved to formation.js.old
+this is the new one that will be rewritten 
+using d3
+
+*/
+
+
 function parseFormationData(data){
-	json = JSON.parse(data);
+    //json = JSON.parse(data);
 }
-console.log("hai")
+
+function 

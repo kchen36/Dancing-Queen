@@ -91,3 +91,6 @@ stage steup works, working on implementing d3
 ahmedF -- 2018-05-29 00:06:26
 login and sign up works, demo user: Bob pass: pass
 
+WongE -- 2018-05-30 14:59:47
+rewrote formation.js using d3
+

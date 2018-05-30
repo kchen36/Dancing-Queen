@@ -40,71 +40,60 @@
   ],
   }
 */
+
+/*
+
+old code moved to formation.js.old
+this is the new one that will be rewritten 
+using d3
+
+*/
+
+
 function parseFormationData(data){
     //json = JSON.parse(data);
 }
 
-var s = document.getElementById('svg_id');
-var playBtn = document.getElementById('play');
-
-var width = data[0].stageSize.length*100;
-var height = data[0].stageSize.width*100 //switched width and length in json test file 
-s.setAttribute('width', width);
-s.setAttribute('height', height);
-var users = data[0].users
-;
-for (var i = users.length-1; i >= 0; i--) {
-    var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    var x = data[0].formations[0].userMovements[i].xcor * 100;
-    var y = data[0].formations[0].userMovements[i].ycor * 100;
-    circle.setAttribute("cx", x);
-    circle.setAttribute("cy", y);
-    circle.setAttribute("r", 30);
-    circle.setAttribute("stroke", users[i].color);
-    circle.setAttribute("fill", users[i].color);
-    s.appendChild(circle);
-
-    var text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    text.setAttribute("x", x);
-    text.setAttribute("y", y);
-    text.setAttribute("text-anchor", "middle");
-    text.setAttribute("stroke", "black");
-    text.textContent = users[i].username;
-    s.appendChild(text);
+//work in progress
+function getWidth(){
+	return data[0].stageSize.length * 100;
 }
 
-//play button just jumps to next formation
-var play = function(){
-    for(var i = 0; i < s.children.length; i+=2){
-	var x = data[0].formations[1].userMovements[i/2].xcor * 100;
-	var y = data[0].formations[1].userMovements[i/2].ycor * 100;
-	s.children[i].setAttribute("cx", x);
-	s.children[i].setAttribute("cy", y);
-	s.children[i+1].setAttribute("x", x);
-	s.children[i+1].setAttribute("y", y);
-    }
+//work in progress
+function getHeight(){
+	return data[0].stageSize.width * 100;
 }
 
-playBtn.addEventListener("click", play)
+//work in progress
+function getUsers(){
+	return data[0].users;
+}
 
+var svg = null;
 
-/*
-//d3 stuff to replace all this eventually
-var body = d3.select(".container");
+//function that sets everything up
+//to be run at the beginning
+function initialize(){
+	svg = d3.select('#svg_id')
+		.attr('width',getWidth())
+		.attr('height',getHeight());
+	for(var i = 0; i < getUsers().length; i++){
+		addUser(getUsers()[i],getFormations()[0].userMovements[i]);
+	}
+}
 
-var svg = body.append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .style("border","1px solid black");
-
-var circles = svg.selectAll("circle")
-    .data(data)
-    .enter()
-    .append("circle")
-
-var circleAttributes = circles
-    .attr("cx", width/2)
-    .attr("cy", height/2)
-    .attr("r", 30)
-    .style("fill", function(d) { console.log(d.users); });
-*/
+function addUser(user,formation){
+	svg
+		.append('circle')
+		.attr('cx',formation.xcor * 100)
+		.attr('cy',formation.ycor * 100)
+		.attr('r',30)
+		.style('stroke',user.color)
+		.style('fill',user.color);
+		.append('text')
+		.attr('x',formation.xcor * 100)
+		.attr('y',formation.ycor * 100)
+		.attr('text-anchor','middle')
+		.style('stroke','black')
+		.text(user.username);
+}
