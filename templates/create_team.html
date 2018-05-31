@@ -2,7 +2,7 @@
 
 {% block head %}
 <title>Home</title>
-<style> </style>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/create_team.css') }}" />
 {% endblock %}
 
 {% block navbar %}
@@ -13,14 +13,20 @@
 {% block content %}  
  <body>
   
-  You can create a team here. <br>
-  <form action="">
-    Team Name: <input type="text" name="name"><br>
-    Team Description: <br>
-    <textarea rows="4" cols="50" name="desc"></textarea><br>
-    Search Users: <input type="text" name="member"><input type="submit"><br>
-    Current Roster:<br>
+  You can create a team here. <br><br>
+  <form method="POST" autocomplete="off" action="">
+    Team Name: <input type="text" name="name" placeholder="Name"><br><br>
+    Team Description: <br><br>
+    <textarea rows="4" cols="50" name="desc"></textarea><br><br>
+    <div class="autocomplete" style="width:300px;">
+      <input id="user_search" type="text" name="user_search" placeholder="Search Users...">
+    </div>
+    <input id="search" type="submit">
+     <br><br>
+    Current Roster:<br><br>
     <input type="submit" value="CREATE">
   </form>
-</body>
+
+  <script src="{{ url_for('static', filename='js/create_team.js') }}" type="text/javascript"></script>
+ </body>
 {% endblock %}
