@@ -2,7 +2,7 @@ import sqlite3
 import hashlib
 from os import path
 
-f = "app.db"
+f = path.dirname (__file__) + "/../data/app.db"
 db = sqlite3.connect(f)
 c = db.cursor()
 c.execute('CREATE TABLE IF NOT EXISTS users (username STRING PRIMARY KEY, password STRING);')
