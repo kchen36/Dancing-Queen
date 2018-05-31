@@ -49,9 +49,10 @@ using d3
 
 */
 
+var json = null;
 
 function parseFormationData(data){
-    //json = JSON.parse(data);
+    json = JSON.parse(data);
 }
 
 //work in progress
@@ -69,6 +70,10 @@ function getUsers(){
 	return data[0].users;
 }
 
+function getUserStartLocation(user){
+	return
+}
+
 var svg = null;
 
 //function that sets everything up
@@ -78,22 +83,35 @@ function initialize(){
 		.attr('width',getWidth())
 		.attr('height',getHeight());
 	for(var i = 0; i < getUsers().length; i++){
-		addUser(getUsers()[i],getFormations()[0].userMovements[i]);
+		addUser(getUsers()[i],getUserStartLocation(getUsers()[i]));
 	}
 }
 
-function addUser(user,formation){
+function addUser(user,userMovement){
 	svg
 		.append('circle')
-		.attr('cx',formation.xcor * 100)
-		.attr('cy',formation.ycor * 100)
+		.attr('cx',userMovement['xcor'] * 100)
+		.attr('cy',userMovement['ycor'] * 100)
 		.attr('r',30)
-		.style('stroke',user.color)
-		.style('fill',user.color);
+		.style('stroke',user['color'])
+		.style('fill',user['color']);
 		.append('text')
-		.attr('x',formation.xcor * 100)
-		.attr('y',formation.ycor * 100)
+		.attr('x',userMovement['xcor'] * 100)
+		.attr('y',userMovement['ycor'] * 100)
 		.attr('text-anchor','middle')
 		.style('stroke','black')
-		.text(user.username);
+		.text(user['username'])
+		.attr('id','user');
+}
+
+function moveUsers(formation){
+	svg.selectAll('#user')
+		.each(function(){
+			var user = d3.select(this);
+			user
+				.transition()
+				.attr('cx',formation['userMovements'][user.attr('username')])
+				.attr('cy',formation['userMovements'][user.attr('username')])
+				.delay(formation['timeTillNext'] * 1000);
+			});
 }
