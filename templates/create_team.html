@@ -2,25 +2,39 @@
 
 {% block head %}
 <title>Home</title>
-<style> </style>
+<style>
+    .body {
+    padding-top: 30px;
+    margin: auto;
+    }
+  </style>
 {% endblock %}
 
 {% block navbar %}
-  <li><a href="/create_team">Create Team</a></li>
-  <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+	<li><a href="/create_team"><span class="glyphicon glyphicon-file"></span> Create Team</a></li>
+	<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
 {% endblock %}
-  
-{% block content %}  
- <body>
-  
-  You can create a team here. <br>
+
+	{% block content %}
+	<div class="body" style="display: table">
+	  <div id="box">
+  <h4 style="text-align:center;"><b>Create a Team</b></h4><br>
   <form action="">
-    Team Name: <input type="text" name="name"><br>
-    Team Description: <br>
-    <textarea rows="4" cols="50" name="desc"></textarea><br>
-    Search Users: <input type="text" name="member"><input type="submit"><br>
+    <div class="form-group">
+      <label for="name"> Team Name: </label>
+      <input type="text" name="team_name" class="form-control" id="name" style="width:300px"><br>
+    </div>
+    <div class="form-group">
+      <label for="desc"> Team Description: </label>
+      <textarea class="form-control" id="desc" rows="4" cols="50" name="description"></textarea><br>
+    </div>
+    <div class="form-group">
+      <label for="search"> Search Users: </label>
+      <input type="text" name="member" id="search" class="form-control" style="width:300px">
+    </div>
     Current Roster:<br>
     <input type="submit" value="CREATE">
   </form>
-</body>
+	  </div>
+	  </div>
 {% endblock %}

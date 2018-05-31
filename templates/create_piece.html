@@ -1,18 +1,16 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block head %}
 <title>Create Piece</title>
-
 {% endblock %}
 
 {% block navbar %}
-<li><a href="#">Create Team</a></li>
-<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+	<li><a href="/create_team"><span class="glyphicon glyphicon-file"></span> Create Team</a></li>
+	<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
 {% endblock %}
 
 
 {% block content %}
-<body>
   <div class="container">
     <h1> Create a new piece </h1>
     <form>
@@ -43,6 +41,4 @@
   <script src="https://d3js.org/d3.v5.js"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/data.json') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/formation.js') }}"></script>
-</body>
-
 {% endblock %}

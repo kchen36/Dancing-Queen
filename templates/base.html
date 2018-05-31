@@ -17,30 +17,16 @@
     </div>
     <ul class="nav navbar-nav navbar-right">
       {% block navbar %}
-      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span>  Log In</a></li>
-      <li><a href="/register"><span class="glyphicon glyphicon-pencil"></span>  Sign Up</a></li>
       {% endblock %}
     </ul>
   </div>
   </nav>
   <div id="flashed_messages">
     {% for message in get_flashed_messages() %}
-      <div class="jumbotron" style="height:125px">
-	<p class="lead" style="text-align:center;">{{ message }}</p>
-      </div>
     {% endfor %}
   </div>
   
   {% block content %}
-  <div class="body">
-    <h1 class="text-center"> Welcome to Dancing Queen! </h1>
-    <br>
-    <h3 class="text-center">Use this website to share and view formations with the rest of your dance team.</h3> <br>
-    <h4 class="text-center"><span class="glyphicon glyphicon-cloud-upload"></span> Use our easy-to-use formation system to create and post formations.</h4><br>
-    <h4 class="text-center"><span class="glyphicon glyphicon-tags"></span> Neatly organize the many different teams you are in.</h4><br>
-    <h4 class="text-center"><span class="glyphicon glyphicon-user"></span> Keep track of the members in your teams.</h4><br>
-    <hr>
-  </div>
-</body>
   {% endblock %}
+  </body>
 </html>
