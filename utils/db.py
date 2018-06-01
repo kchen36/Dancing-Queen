@@ -17,6 +17,16 @@ db.close()
 def encrypt(password):
     return hashlib.sha224(password).hexdigest()
 
+#get all users
+def get_users():
+    f = "app.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('SELECT username FROM users;')
+    result = c.fetchall()
+    db.close()
+    return result()
+
 #returns the password of a user if the username exist
 def get_password(user):
     f = "app.db"
