@@ -15,7 +15,9 @@
       {% endblock %}
 
     {% for message in get_flashed_messages() %}
-      <p>{{ message }}</p>
+      <div class="jumbotron" style="height:125px">
+	<p class="lead" style="text-align:center;">{{ message }}</p>
+      </div>
     {% endfor %}
   
   {% block content %}
@@ -28,6 +30,5 @@
     <h4 class="text-center"><span class="glyphicon glyphicon-user"></span> Keep track of the members in your teams.</h4><br>
     <hr>
   </div>
-</body>
   {% endblock %}
 
