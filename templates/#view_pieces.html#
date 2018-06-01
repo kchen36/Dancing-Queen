@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>View Piece</title>
+{% endblock %}
+
+{% block navbar %}
+<li><a href="/create_team"><span class="glyphicon glyphicon-file"></span> Create Team</a></li>
+<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+{% endblock %}
+
+{% block content %}
+Look at this amazing piece. <br>
+{% endblock %}
