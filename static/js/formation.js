@@ -122,3 +122,17 @@ function moveUsers(formation){
 				.delay(formation['timeTillNext'] * 1000);
 			});
 }
+
+function removeSlide(json,index){
+	return json['formations'].pop(index);
+}
+
+function insertSlide(json,index,item){
+	if(index >= 0 && index < json['formations'].length){
+		json['formations'].splice(index,0,item)
+		return true;
+	}
+	else{
+		return false;
+	}
+}

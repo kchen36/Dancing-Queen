@@ -109,3 +109,6 @@ animations done, but not tested
 parkP -- 2018-06-01 14:41:56
 fixed error
 
+WongE -- 2018-06-01 14:51:19
+functions for adding and removing slides
+
