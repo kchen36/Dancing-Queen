@@ -70,7 +70,13 @@ function getUsers(){
 	return data[0].users;
 }
 
+//work in progress
 function getUserStartLocation(user){
+	return
+}
+
+//work in progress
+function getFirstTag(user){
 	return
 }
 
@@ -83,11 +89,11 @@ function initialize(){
 		.attr('width',getWidth())
 		.attr('height',getHeight());
 	for(var i = 0; i < getUsers().length; i++){
-		addUser(getUsers()[i],getUserStartLocation(getUsers()[i]));
+		addUser(getUsers()[i],getUserStartLocation(getUsers()[i]),getFirstTag(getUsers()[i]));
 	}
 }
 
-function addUser(user,userMovement){
+function addUser(user,userMovement,userTag){
 	svg
 		.append('circle')
 		.attr('cx',userMovement['xcor'] * 100)
@@ -100,7 +106,7 @@ function addUser(user,userMovement){
 		.attr('y',userMovement['ycor'] * 100)
 		.attr('text-anchor','middle')
 		.style('stroke','black')
-		.text(user['username'])
+		.text(userTag)
 		.attr('id','user');
 }
 
@@ -109,6 +115,7 @@ function moveUsers(formation){
 		.each(function(){
 			var user = d3.select(this);
 			user
+				.text(formation['userTags'][user.attr('username')])
 				.transition()
 				.attr('cx',formation['userMovements'][user.attr('username')])
 				.attr('cy',formation['userMovements'][user.attr('username')])

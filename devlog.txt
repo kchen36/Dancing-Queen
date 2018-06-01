@@ -100,3 +100,6 @@ made flash messages prettier
 WongE -- 2018-05-31 14:48:48
 animations
 
+WongE -- 2018-06-01 14:41:37
+animations done, but not tested
+
