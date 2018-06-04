@@ -88,26 +88,27 @@ function initialize(){
 	svg = d3.select('#svg_id')
 		.attr('width',getWidth())
 		.attr('height',getHeight());
-	for(var i = 0; i < getUsers().length; i++){
-		addUser(getUsers()[i],getUserStartLocation(getUsers()[i]),getFirstTag(getUsers()[i]));
-	}
+	addGroup(getUsers,json.formations[0]);
 }
 
-function addUser(user,userMovement,userTag){
+function addGroup(users,formation){
 	svg
-		.append('circle')
-		.attr('cx',userMovement['xcor'] * 100)
-		.attr('cy',userMovement['ycor'] * 100)
+		.selectAll('circle')
+		.data(users)
+		.enter()
+		.attr('cx',function(user){return formation['userMovements'][user['username']]['xcor']})
+		.attr('cy',function(user){return formation['userMovements'][user['username']]['ycor']})
 		.attr('r',30)
-		.style('stroke',user['color'])
-		.style('fill',user['color']);
-		.append('text')
-		.attr('x',userMovement['xcor'] * 100)
-		.attr('y',userMovement['ycor'] * 100)
-		.attr('text-anchor','middle')
-		.style('stroke','black')
-		.text(userTag)
-		.attr('id','user');
+		.style('stroke',function(user){return user['color']})
+		.style('fill',function(user){return user['color']})
+		.attr('id','user')
+		.attr('username',function(user){return user['username']});
+		.text(function(user){return formation['userTags'][user['username']]});
+//		.append('text')
+//		.attr('x',formation['userMovements'][user['username']]['xcor'])
+//		.attr('y',formation['userMovements'][user['username']]['ycor'])
+//		.attr('text-anchor','middle')
+//		.style('stroke','black')
 }
 
 function moveUsers(formation){
@@ -117,8 +118,8 @@ function moveUsers(formation){
 			user
 				.text(formation['userTags'][user.attr('username')])
 				.transition()
-				.attr('cx',formation['userMovements'][user.attr('username')])
-				.attr('cy',formation['userMovements'][user.attr('username')])
+				.attr('cx',formation['userMovements'][user.attr('username')]['xcor'])
+				.attr('cy',formation['userMovements'][user.attr('username')]['ycor'])
 				.delay(formation['timeTillNext'] * 1000);
 			});
 }

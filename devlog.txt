@@ -112,3 +112,6 @@ fixed error
 WongE -- 2018-06-01 14:51:19
 functions for adding and removing slides
 
+wongE -- 2018-06-04 14:48:22
+made switching frames easier
+
