@@ -3,7 +3,7 @@ import hashlib
 from os import path
 
 f = path.dirname (__file__) + "/../data/app.db"
-def createtables()
+def createtables():
     db = sqlite3.connect(f)
     c = db.cursor()
     c.execute('CREATE TABLE IF NOT EXISTS users (username STRING PRIMARY KEY, password STRING);')
