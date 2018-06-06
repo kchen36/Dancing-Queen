@@ -118,3 +118,6 @@ made switching frames easier
 parkP -- 2018-06-04 14:51:53
 worked on create team
 
+parkP -- 2018-06-06 14:45:07
+made small changes to create_team template
+
