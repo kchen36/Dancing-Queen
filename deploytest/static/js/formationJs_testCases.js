@@ -83,4 +83,6 @@ testJson = {
 								},
 
 							],
-		   }
+		   };
+
+json = testJson;

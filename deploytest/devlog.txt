@@ -121,3 +121,6 @@ worked on create team
 parkP -- 2018-06-06 14:45:07
 made small changes to create_team template
 
+WongE -- 2018-06-06 14:52:11
+debugging javascript
+
