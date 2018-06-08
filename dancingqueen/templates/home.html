@@ -27,9 +27,11 @@
 		</tr>
 	      </thead>
 	      <tbody>
+		{% for name in teams %}
 		<tr>
-		  <td>Example name</td>
+		  <button type="Submit" name="Submit" class="btn btn-primary btn-lg" style="width:300px" value="{{teams[name]}}">{{teams[name]}}</button>
 		</tr>
+		{% endfor %}
 	      </tbody>
 	    </table>
 	  </div>
