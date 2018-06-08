@@ -124,3 +124,6 @@ made small changes to create_team template
 WongE -- 2018-06-06 14:52:11
 debugging javascript
 
+chenK -- 2018-06-07 21:27:40
+rename folders and conf and wsgi
+
