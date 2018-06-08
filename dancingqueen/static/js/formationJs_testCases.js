@@ -86,3 +86,4 @@ testJson = {
 		   };
 
 json = testJson;
+initialize()

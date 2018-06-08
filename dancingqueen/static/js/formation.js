@@ -56,14 +56,12 @@ function parseFormationData(data){
 }
 
 function getWidth(){
-	return json['stageSize']['length'] * 100;
+	return json['stageSize']['length'] * 100 + 60;
 }
 
 function getHeight(){
-	return json['stageSize']['width'] * 100;
-}
-
-var svg = null;
+	return json['stageSize']['width'] * 100 + 60;
+} var svg = null;
 
 //function that sets everything up
 //to be run at the beginning
@@ -79,19 +77,15 @@ function addGroup(users,formation){
 		.selectAll('circle')
 		.data(users)
 		.enter()
-		.attr('cx',function(user){return formation['userMovements'][user['username']]['xcor']})
-		.attr('cy',function(user){return formation['userMovements'][user['username']]['ycor']})
+		.append('circle')
+		.attr('cx',function(user){return formation['userMovements'][user['username']]['xcor'] * 100 + 30})
+		.attr('cy',function(user){return formation['userMovements'][user['username']]['ycor'] * 100 + 30})
 		.attr('r',30)
 		.style('stroke',function(user){return user['color']})
 		.style('fill',function(user){return user['color']})
 		.attr('id','user')
 		.attr('username',function(user){return user['username']})
 		.text(function(user){return formation['userTags'][user['username']]});
-//		.append('text')
-//		.attr('x',formation['userMovements'][user['username']]['xcor'])
-//		.attr('y',formation['userMovements'][user['username']]['ycor'])
-//		.attr('text-anchor','middle')
-//		.style('stroke','black')
 }
 
 function moveUsers(formation){
@@ -101,8 +95,8 @@ function moveUsers(formation){
 			user
 				.text(formation['userTags'][user.attr('username')])
 				.transition()
-				.attr('cx',formation['userMovements'][user.attr('username')]['xcor'])
-				.attr('cy',formation['userMovements'][user.attr('username')]['ycor'])
+				.attr('cx',formation['userMovements'][user.attr('username')]['xcor'] * 100 + 30)
+				.attr('cy',formation['userMovements'][user.attr('username')]['ycor'] * 100 + 30)
 				.delay(formation['timeTillNext'] * 1000);
 			});
 }
