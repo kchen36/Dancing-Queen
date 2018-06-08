@@ -133,3 +133,6 @@ edited signin.html
 parkP -- 2018-06-08 14:40:35
 added buttons to home.html
 
+WongE -- 2018-06-08 14:52:26
+works, just need to display text and get transition delays to work
+
