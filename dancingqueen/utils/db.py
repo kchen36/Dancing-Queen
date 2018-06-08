@@ -14,6 +14,8 @@ def createtables():
     c.execute('CREATE TABLE IF NOT EXISTS formations(id INTEGER,formid INTEGER, dancer STRING, x INTEGER, y INTEGER, time INTEGER, tag STRING);')
     db.close()
 
+createtables()
+
 #hash password
 def encrypt(password):
     return hashlib.sha224(password).hexdigest()
