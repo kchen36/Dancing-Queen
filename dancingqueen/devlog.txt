@@ -130,3 +130,6 @@ rename folders and conf and wsgi
 parkP -- 2018-06-08 14:28:35
 edited signin.html
 
+parkP -- 2018-06-08 14:40:35
+added buttons to home.html
+
