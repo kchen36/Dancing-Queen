@@ -10,7 +10,7 @@ def createtables():
     c.execute('CREATE TABLE IF NOT EXISTS teams (name STRING, id INTEGER PRIMARY KEY);')
     c.execute('CREATE TABLE IF NOT EXISTS members (id INTEGER, leader BIT,name STRING);')
     c.execute('CREATE TABLE IF NOT EXISTS permissions(id INTEGER, user STRING);')
-    c.execute('CREATE TABLE IF NOT EXISTS pieces(teamid INTEGER, pieceid INTEGER PRIMAY KEY, path STRING, name STRING, length INTEGER, width INTEGER, rows INTEGER, columns INTEGER, privacy BIT);')
+    c.execute('CREATE TABLE IF NOT EXISTS pieces(teamid INTEGER, pieceid INTEGER PRIMAY KEY, name STRING, rows INTEGER, columns INTEGER);')
     c.execute('CREATE TABLE IF NOT EXISTS formations(id INTEGER,formid INTEGER, dancer STRING, x INTEGER, y INTEGER, time INTEGER, tag STRING);')
     db.close()
 
@@ -211,7 +211,7 @@ def delform(pieceid, num, dancer, x, y, time, tag):
     db.commit()
     db.close()
     
-def addpiece(teamid, path, name, length, width, rows, columns, privacy):
+def addpiece(teamid, name, length, width, rows, columns):
     db = sqlite3.connect(f)
     c = db.cursor()
     number = 0
@@ -219,7 +219,7 @@ def addpiece(teamid, path, name, length, width, rows, columns, privacy):
     result = c.fetchall()
     if result[0][0] != None:
         number = result[0][0] + 1
-    c.execute('INSERT INTO pieces VALUES("%d", "%d", "%s" , "%s", "%d", "%d", "%d", "%d", "%d");' %(teamid, number, path, name, length, width, rows, columns, privacy) )
+    c.execute('INSERT INTO pieces VALUES("%d", "%d", "%s", "%d", "%d");' %(teamid, number, name, rows, columns )
     db.commit()
     db.close()
 
