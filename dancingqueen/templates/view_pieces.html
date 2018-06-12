@@ -10,5 +10,16 @@
 {% endblock %}
 
 {% block content %}
-Look at this amazing piece. <br>
+<div class="container">
+  <button class="btn btn-primary" id="play"> Play </button>
+  <button class="btn btn-primary" id="add_formation"> + </button>
+  <button class="btn btn-primary" id="delete"> Delete </button> <br><br>
+  <input type="text" id="name" placeholder="Name">
+  <input type="text" id="tag" placeholder="Notes">
+  <button class="btn btn-primary" id="create"> Create Circle </button> <br><br>
+  <button class="btn btn-primary" id="del_circle"> Delete Circle </button> <br><br>
+  <svg id="svg_id" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid black">
+  </svg>
+</div>
+<script src="{{ url_for('static', filename='js/formation.js') }}" type="text/javascript"> </script>
 {% endblock %}

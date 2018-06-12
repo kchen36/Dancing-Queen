@@ -78,14 +78,14 @@ def create_team():
     team_leader = auth.session['username']
     if request.method == 'POST':
         name = request.form.get('team_name')
-        print "members: ", request.form.get('members')
+        #print "members: ", request.form.get('members')
         members = request.form.get('members').split()
         team_id = db.createteam(name, team_leader)
         for member in members:
             db.addmember(team_id, member)
     return render_template('create_team.html')
 
-@app.route('/create_team.js')
+@app.route('/static/js/create_team.js')
 def jsfile():
     data = []
     for i in db.get_users():
@@ -112,9 +112,9 @@ def create_piece():
 @app.route('/view_piece', methods=["GET","POST"])
 @auth.in_session
 def view_piece():
-    if request.method == "POST":
-        piece_id = request.form.get('p')
-    return render_template('view_pieces.html', piece_id = piece_id)
+    #if request.method == "POST":
+    #   piece_id = request.form.get('p')
+    return render_template('view_pieces.html') #, piece_id = piece_id)
 
     
 if __name__ == '__main__':
