@@ -142,3 +142,6 @@ worked on creating teams, adding members
 ahmedF -- 2018-06-12 13:49:20
 pieces
 
+parkP -- 2018-06-12 14:06:56
+fixed flash message error
+
