@@ -103,9 +103,15 @@ def pieces():
                                team_name = db.getname(int(team_id)),
                                pieces = pieces)
 
-@app.route('/create_piece')
+@app.route('/create_piece', methods=["GET","POST"])
 @auth.in_session
 def create_piece():
+    team_leader = auth.session['username']
+    if request.method == 'POST':
+        name = request.form.get('piece_name')
+        columns = request.form.get('columns')
+        rows = request.form.get('rows')
+        team_id = db.addpiece(name, columns, rows)
     return render_template('create_piece.html')
 
 @app.route('/view_piece', methods=["GET","POST"])
