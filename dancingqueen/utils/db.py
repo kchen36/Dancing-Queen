@@ -79,6 +79,18 @@ def createteam(name,leader):
     db.commit()
     db.close()
     return number
+
+def getteamid(name,leader):
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('SELECT id FROM teams WHERE name = "%s";' %(name) )
+    results = c.fetchall()
+    c.execute('SELECT id FROM members WHERE leader = 1 AND name = "%s";' %( leader))
+    results2 = c.fetchall()
+    for x in results:
+        for y in results2:
+            if x == y:
+                return x
     
 def getname(teamid):
     db = sqlite3.connect(f)
