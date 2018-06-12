@@ -67,10 +67,16 @@ def register():
 def teams():
     return render_template('teams.html')
 
-@app.route('/create_team')
+@app.route('/create_team', methods=['GET', 'POST'])
 @auth.in_session
 def create_team():
-    return render_template('create_team.html')
+    if request.method == 'POST':
+        name = request.form.get('team_name')
+        members = request.form.get('members').split()
+        #print members
+        #db.createteam(name, leader)
+        #db.addmember(teamid, name):
+    return render_template('create_team.html', users=json.dumps(db.get_users()))
 
 @app.route('/pieces')
 def pieces():

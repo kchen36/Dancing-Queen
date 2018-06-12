@@ -136,3 +136,6 @@ added buttons to home.html
 WongE -- 2018-06-08 14:52:26
 works, just need to display text and get transition delays to work
 
+ahmedF -- 2018-06-12 09:43:30
+worked on creating teams, adding members
+

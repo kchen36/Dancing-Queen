@@ -8,7 +8,7 @@ def createtables():
     c = db.cursor()
     c.execute('CREATE TABLE IF NOT EXISTS users (username STRING PRIMARY KEY, password STRING);')
     c.execute('CREATE TABLE IF NOT EXISTS teams (name STRING, id INTEGER PRIMARY KEY);')
-    c.execute('CREATE TABLE IF NOT EXISTS members (id INTEGER, leader BIT,name STRING, nickname STRING);')
+    c.execute('CREATE TABLE IF NOT EXISTS members (id INTEGER, leader BIT,name STRING);')
     c.execute('CREATE TABLE IF NOT EXISTS permissions(id INTEGER, user STRING);')
     c.execute('CREATE TABLE IF NOT EXISTS pieces(teamid INTEGER, pieceid INTEGER PRIMAY KEY, song STRING, path STRING, name STRING, length INTEGER, width INTEGER, rows INTEGER, columns INTEGER, privacy BIT);')
     c.execute('CREATE TABLE IF NOT EXISTS formations(id INTEGER,formid INTEGER, dancer STRING, x INTEGER, y INTEGER, time INTEGER, tag STRING);')
@@ -27,7 +27,7 @@ def get_users():
     c.execute('SELECT username FROM users;')
     result = c.fetchall()
     db.close()
-    return result()
+    return result
 
 #returns the password of a user if the username exist
 def get_password(user):
@@ -66,7 +66,7 @@ def adduser(user, password):
 #adduser('u', 'password')
 
 #creates a team and the creator is the leader
-def createteam(name,leader,nickname):
+def createteam(name,leader):
     db = sqlite3.connect(f)
     c = db.cursor()
     number = 0
@@ -75,7 +75,7 @@ def createteam(name,leader,nickname):
     if result[0][0] != None:
         number = result[0][0] + 1
     c.execute('INSERT INTO teams VALUES("%s", "%d");' %(name, number))
-    c.execute('INSERT INTO members VALUES("%d", 1, "%s", "%s");' %(number, name, nickname))
+    c.execute('INSERT INTO members VALUES("%d", 1, "%s");' %(number, name))
     db.commit()
     db.close()
     
@@ -88,14 +88,15 @@ def getname(teamid):
     db.close()
     return result[0][0]
 
-#adds a person to a team and adds a nickname
-def addmember(teamid, name, nick):
+#adds a person to a team
+def addmember(teamid, name):
     db = sqlite3.connect(f)
     c = db.cursor()
-    c.execute('INSERT INTO members VALUES("%d", 0, "%s", "%s");' %(teamid, name, nick))
+    c.execute('INSERT INTO members VALUES("%d", 0, "%s");' %(teamid, name))
     db.commit()
     db.close()
 
+########### function no longer needed
 #gets a nickname of a person from a specific team id
 def getnick(teamid, name):
     db = sqlite3.connect(f)
@@ -135,7 +136,7 @@ def checkpermission(pieceid, username):
     else:
         db.close()
         return True
-    
+########## function no longer needed    
 #changes the nickname of a member of a team  
 def editnick(teamid,member,nickname):
     db = sqlite3.connect(f)
