@@ -106,10 +106,12 @@ def pieces():
 def create_piece():
     return render_template('create_piece.html')
 
-@app.route('/edit')
+@app.route('/view_piece', methods=["GET","POST"])
 @auth.in_session
 def view_piece():
-    return render_template('view_piece.html')
+    if request.method == "POST":
+        piece_id = request.form.get('p')
+    return render_template('view_pieces.html', piece_id = piece_id)
 
     
 if __name__ == '__main__':

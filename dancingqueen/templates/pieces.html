@@ -14,8 +14,10 @@
 	Welcome user! This is the page for {{ team_name }}. <br><br>
 	<a href="/create_piece" type="button" class="btn btn-info btn-lg">Create New Piece</a> <br><br>
 	The buttons below will allow you to view each piece for this team. <br>
-	{% for piece in pieces %}
-	<button class="btn btn-info" type="button" value="{{ piece.id }}"> {{piece.name}} </button>
-	{% endfor %}
+	<form method="POST" action="/view_piece">
+	  {% for piece in pieces %}
+	  <button class="btn btn-info" type="submit" name="p" value="{{ piece.id }}"> {{piece.name}} </button>
+	  {% endfor %}
+	</form>
 	</div>
 {% endblock %}
