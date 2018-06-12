@@ -63,6 +63,7 @@ function getHeight(){
 	return json['stageSize']['width'] * 100 + 60;
 } var svg = null;
 
+var formationNum = 0;
 //function that sets everything up
 //to be run at the beginning
 function initialize(){
@@ -88,6 +89,7 @@ function addGroup(users,formation){
 		.text(function(user){return formation['userTags'][user['username']]});
 }
 
+var instant = 1;
 function moveUsers(formation){
 	svg.selectAll('#user')
 		.each(function(){
@@ -95,9 +97,19 @@ function moveUsers(formation){
 			user
 				.text(formation['userTags'][user.attr('username')])
 				.transition()
-				.attr('cx',formation['userMovements'][user.attr('username')]['xcor'] * 100 + 30)
-				.attr('cy',formation['userMovements'][user.attr('username')]['ycor'] * 100 + 30)
-				.delay(formation['timeTillNext'] * 1000);
+				.attr('transform','translate(' + cx + ',' + cy + ')')
+				.duration(formation['timeTillNext'] * 1000 * instant);
+			});
+	svg.selectAll('#tag')
+		.each(function(){
+			var tag = d3.select(this);
+			x = scaleToScreen(formation['userMovements'][tag.attr('username')]['xcor']);
+			y = scaleToScreen(formation['userMovements'][tag.attr('username')]['ycor'] + 1);
+			tag
+				.html(tag['username'] + ':' + formation['userTags'][tag.attr('username')])
+				.transition()
+				.attr('transform','translate(' + x + ',' + y + ')')
+				.duration(formation['timeTillNext'] * 1000 * instant);
 			});
 }
 
@@ -113,4 +125,41 @@ function insertSlide(json,index,item){
 	else{
 		return false;
 	}
+}
+
+function save(){
+	currentFormation['userMovements'] = currentModifications;
+	updateModifications(currentFormation);
+}
+
+function btn_previous(){
+	if(formationNum > 0){
+		formationNum -= 1;
+		switchFormation(json['formations'][formationNum]);
+	}
+}
+
+function btn_del_formation(){
+	btn_previous();
+	removeSlide(json,formationNum + 1);
+}
+
+function btn_play(){
+	instant = 0;
+	switchFormation(json['formations'][0])
+	instant = 1;
+	for(var i = 0; i < json['formations'].length; i++){
+		switchFormation(json['formations'][i]);
+	}
+	formationNum = json['formations'].length;
+}
+
+function btn_add_formation(){
+	var frame = {};
+	frame['timeTillNext'] = 1;
+	frame['userMovements'] = {};
+	for(var key in currentFormation['userMovements']){
+		frame['userMovements'][key] = {};
+		frame['userMovements'][key][xcor] //inprogress
+	insertSlide(json,formatioNum + 1, frame);
 }
