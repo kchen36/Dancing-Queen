@@ -26,15 +26,17 @@
 		  <th scope="col">Below is a list of all the teams you are in.</th>
 		</tr>
 	      </thead>
-		{% for name in teams %}
 	      <tbody>
-		<tr>
-		<td>
-		  <a href="/pieces" name="Submit" class="btn btn-primary btn-block" style="width:300px" value="{{name}}">{{ name }}</a>
-</td>
-		</tr>
-		</tbody>
-		{% endfor %}
+		<form method="POST" action="/pieces">
+		  {% for team in teams %}
+		  <tr>
+		    <td>
+		      <button type="submit" name="Submit" class="btn btn-primary btn-block" style="width:300px" value="{{team.id}}">{{ team.name }}</button>
+		    </td>
+		  </tr>
+		  {% endfor %}
+		</form>
+	      </tbody>
 	    </table>
 	  </div>
 	</div>

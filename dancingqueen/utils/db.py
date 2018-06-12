@@ -90,7 +90,7 @@ def getteamid(name,leader):
     for x in results:
         for y in results2:
             if x == y:
-                return x
+                return x[0][0]
     
 def getname(teamid):
     db = sqlite3.connect(f)

@@ -25,7 +25,7 @@ def index():
     team_ids = db.getteams(auth.session['username'])
     teams = []
     for team_id in team_ids:
-        teams.append( db.getname(team_id[0]))
+        teams.append( {"name":db.getname(team_id[0]), "id":team_id[0] })
     return render_template('home.html',
                            teams = teams)
 
@@ -91,10 +91,15 @@ def jsfile():
                                         data = json.dumps( db.get_users()) ),
                         mimetype="text/javascript")
 
-@app.route('/pieces')
+@app.route('/pieces', methods=["GET","POST"])
+@auth.in_session
 def pieces():
-    #db.getpieces
-    return render_template('pieces.html')
+    if request.method == "POST":
+        team_id = request.form.get('Submit')
+        pieces = db.getpieces(int(team_id))
+    return render_template('pieces.html',
+                               team_name = db.getname(int(team_id)),
+                               pieces = pieces)
 
 @app.route('/create_piece')
 @auth.in_session

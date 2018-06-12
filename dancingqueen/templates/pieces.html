@@ -11,9 +11,11 @@
 
 {% block content %}
 	<div class="body" style="margin:0 5em;">
-	Welcome user! This is the page for each team. <br>
-	<a href="/create_piece" type="button" class="btn btn-info btn-lg btn-block">Create New Piece</a> <br>
-The buttons below will allow you to view each piece in a team. <br>
-	<button type="button"> View </button>
+	Welcome user! This is the page for {{ team_name }}. <br><br>
+	<a href="/create_piece" type="button" class="btn btn-info btn-lg">Create New Piece</a> <br><br>
+	The buttons below will allow you to view each piece for this team. <br>
+	{% for piece in pieces %}
+	<button class="btn btn-info" type="button" value="{{ piece.id }}"> {{piece.name}} </button>
+	{% endfor %}
 	</div>
 {% endblock %}
