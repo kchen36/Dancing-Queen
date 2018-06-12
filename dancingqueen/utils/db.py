@@ -219,7 +219,7 @@ def addpiece(teamid, name, length, width, rows, columns):
     result = c.fetchall()
     if result[0][0] != None:
         number = result[0][0] + 1
-    c.execute('INSERT INTO pieces VALUES("%d", "%d", "%s", "%d", "%d");' %(teamid, number, name, rows, columns )
+    c.execute('INSERT INTO pieces VALUES("%d", "%d", "%s", "%d", "%d");' %(teamid, number, name, rows, columns ))
     db.commit()
     db.close()
 

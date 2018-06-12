@@ -13,7 +13,7 @@
 {% block content %}
   <div class="container">
     <h1> Create a new piece </h1>
-    <form>
+    <form method="POST" action="/pieces">
       <div class="form-group">
 	<div class="row">
 	  <div class="col-lg-3">
@@ -24,12 +24,29 @@
       <div class="form-group">
 	<div class="row">
 	  <div class="col-lg-3">
-	    Upload Audio:  <input type="file" class="custom-file-input" id="music">
+	    Number of columns: <input class="form-control" type="text" name="columns">
 	  </div>
 	</div>
       </div>
+      <div class="form-group">
+	<div class="row">
+	  <div class="col-lg-3">
+	    Number of rows: <input class="form-control" type="text" name="rows">
+	  </div>
+	</div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg" style="width:300px" value="submit">CREATE</button>
+      <!---
+      <div class="form-group">
+	<div class="row">
+	  <div class="col-lg-3">
+	    Upload Audio:  <input type="file" class="custom-file-input" id="music">
+	  </div>
+	</div>
+      </div>--->
     </form>
 
+    <!---
 	<button class="btn" id="play"> Play </button>
 	<button class="btn" id="formation"> + </button>
 	<button class="btn" id="delete"> Delete </button><br><br>
@@ -41,4 +58,8 @@
   <script src="https://d3js.org/d3.v5.js"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/data.json') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/formation.js') }}"></script>
+name
+row
+column
+--->
 {% endblock %}
