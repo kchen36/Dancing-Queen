@@ -22,7 +22,10 @@ app.jinja_env.globals.update(logged_in = auth.logged_in)
 @app.route('/index')
 @auth.in_session
 def index():
-    return render_template('home.html')
+    teams = db.getteams(auth.session['username'])
+    #print teams
+    return render_template('home.html',
+                           teams = teams)
 
 #login: Login page. Renders login.html. Redirects to index after logging in.
 @app.route('/login', methods=['GET', 'POST'])
@@ -70,13 +73,15 @@ def teams():
 @app.route('/create_team', methods=['GET', 'POST'])
 @auth.in_session
 def create_team():
+    team_leader = auth.session['username']
     if request.method == 'POST':
         name = request.form.get('team_name')
         members = request.form.get('members').split()
         #print members
-        #db.createteam(name, leader)
-        #db.addmember(teamid, name):
-    return render_template('create_team.html', users=json.dumps(db.get_users()))
+        team_id = db.createteam(name, team_leader)
+        for member in members:
+            db.addmember(team_id, member)
+    return render_template('create_team.html', data=json.dumps(db.get_users()))
 
 @app.route('/pieces')
 def pieces():
@@ -94,5 +99,5 @@ def view_piece():
 
     
 if __name__ == '__main__':
-    app.debug = False
+    app.debug = True
     app.run(host="127.0.0.1", port=5001)

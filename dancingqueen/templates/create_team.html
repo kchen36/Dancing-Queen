@@ -35,5 +35,6 @@
 
   </form>
 </div>
-<script src="{{ url_for('static', filename='js/create_team.js') }}" type="text/javascript"></script>
+<script type="text/javascript"> {{ data|safe }} </script>
+<script src="{{ url_for('static', filename='js/create_team.js') }}" type="text/javascript"> </script>
 {% endblock %}

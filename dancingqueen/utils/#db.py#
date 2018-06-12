@@ -164,7 +164,7 @@ print result
 db.commit()
 db.close()
 
-#print "bob's teams: ", getteams('bob')
+print "bob's teams: ", getteams('Malta')
 
 #removes a person's permission to edit a piece
 def removepermission(pieceid,user):
