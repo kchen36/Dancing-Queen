@@ -25,7 +25,9 @@
   </nav>
   <div id="flashed_messages">
     {% for message in get_flashed_messages() %}
-     {{message}} <br>
+          <div class="jumbotron" style="height:125px">
+	<p class="lead" style="text-align:center;">{{ message }}</p>
+      </div>
     {% endfor %}
   </div>
   
