@@ -75,7 +75,7 @@ def createteam(name,leader):
     if result[0][0] != None:
         number = result[0][0] + 1
     c.execute('INSERT INTO teams VALUES("%s", "%d");' %(name, number))
-    c.execute('INSERT INTO members VALUES("%d", 1, "%s");' %(number, name))
+    c.execute('INSERT INTO members VALUES("%d", 1, "%s");' %(number, leader))
     db.commit()
     db.close()
     return number
