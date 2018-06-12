@@ -147,3 +147,6 @@ fixed flash message error
 
 WongE -- 2018-06-12 16:28:33
 worked on formation.js
+WongE -- 2018-06-12 17:07:02
+worked on foramtion.js
+

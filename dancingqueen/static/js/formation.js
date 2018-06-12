@@ -98,6 +98,7 @@ function updateModifications(users,formation){
 	}
 }
 
+var formationNum = 0;
 //function that sets everything up
 //to be run at the beginning
 function initialize(){
@@ -196,6 +197,7 @@ function addGroup(users,formation){
 			})
 }
 
+var instant = 1;
 function moveUsers(formation){
 	svg.selectAll('#user')
 		.each(function(){
@@ -206,7 +208,7 @@ function moveUsers(formation){
 				.text(formation['userTags'][user.attr('username')])
 				.transition()
 				.attr('transform','translate(' + cx + ',' + cy + ')')
-				.duration(formation['timeTillNext'] * 1000);
+				.duration(formation['timeTillNext'] * 1000 * instant);
 			});
 	svg.selectAll('#tag')
 		.each(function(){
@@ -217,7 +219,7 @@ function moveUsers(formation){
 				.html(tag['username'] + ':' + formation['userTags'][tag.attr('username')])
 				.transition()
 				.attr('transform','translate(' + x + ',' + y + ')')
-				.duration(formation['timeTillNext'] * 1000);
+				.duration(formation['timeTillNext'] * 1000 * instant);
 			});
 }
 
@@ -251,3 +253,34 @@ function save(){
 	updateModifications(currentFormation);
 }
 
+function btn_previous(){
+	if(formationNum > 0){
+		formationNum -= 1;
+		switchFormation(json['formations'][formationNum]);
+	}
+}
+
+function btn_del_formation(){
+	btn_previous();
+	removeSlide(json,formationNum + 1);
+}
+
+function btn_play(){
+	instant = 0;
+	switchFormation(json['formations'][0])
+	instant = 1;
+	for(var i = 0; i < json['formations'].length; i++){
+		switchFormation(json['formations'][i]);
+	}
+	formationNum = json['formations'].length;
+}
+
+function btn_add_formation(){
+	var frame = {};
+	frame['timeTillNext'] = 1;
+	frame['userMovements'] = {};
+	for(var key in currentFormation['userMovements']){
+		frame['userMovements'][key] = {};
+		frame['userMovements'][key][xcor] //inprogress
+	insertSlide(json,formatioNum + 1, frame);
+}
