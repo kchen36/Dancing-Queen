@@ -78,14 +78,14 @@ def create_team():
     team_leader = auth.session['username']
     if request.method == 'POST':
         name = request.form.get('team_name')
-        #print "members: ", request.form.get('members')
+        print "members: ", request.form.get('members')
         members = request.form.get('members').split()
         team_id = db.createteam(name, team_leader)
         for member in members:
             db.addmember(team_id, member)
     return render_template('create_team.html')
 
-@app.route('/static/js/create_team.js')
+@app.route('/create_team.js')
 def jsfile():
     data = []
     for i in db.get_users():
