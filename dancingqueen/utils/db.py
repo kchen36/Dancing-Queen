@@ -166,17 +166,9 @@ def getteams(username):
     result = c.fetchall()
     db.commit()
     db.close()
+    for x in result:
+        result
     return result
-
-db = sqlite3.connect(f)
-c = db.cursor()
-c.execute('SELECT * FROM members')
-result = c.fetchall()
-print result
-db.commit()
-db.close()
-
-#print "bob's teams: ", getteams('bob')
 
 #removes a person's permission to edit a piece
 def removepermission(pieceid,user):

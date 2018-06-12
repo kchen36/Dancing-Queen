@@ -1,5 +1,5 @@
 #importing flask submodules
-from flask import Flask, render_template, redirect, url_for, session, flash, request
+from flask import Flask, render_template, redirect, url_for, session, flash, request, Response
 #importing our own modules
 from utils import db, auth
 #importing os for urandom()
@@ -22,8 +22,10 @@ app.jinja_env.globals.update(logged_in = auth.logged_in)
 @app.route('/index')
 @auth.in_session
 def index():
-    teams = db.getteams(auth.session['username'])
-    #print teams
+    team_ids = db.getteams(auth.session['username'])
+    teams = []
+    for team_id in team_ids:
+        teams.append( db.getname(team_id[0]))
     return render_template('home.html',
                            teams = teams)
 
@@ -81,10 +83,17 @@ def create_team():
         team_id = db.createteam(name, team_leader)
         for member in members:
             db.addmember(team_id, member)
-    return render_template('create_team.html', data=json.dumps(db.get_users()))
+    return render_template('create_team.html')
+
+@app.route('/scripts/create_team.js')
+def jsfile():
+    return Response(render_template("create_team.js",
+                                        data = json.dumps( db.get_users()) ),
+                        mimetype="text/javascript")
 
 @app.route('/pieces')
 def pieces():
+    #db.getpieces
     return render_template('pieces.html')
 
 @app.route('/create_piece')

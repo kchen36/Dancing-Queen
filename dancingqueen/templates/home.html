@@ -26,13 +26,15 @@
 		  <th scope="col">Below is a list of all the teams you are in.</th>
 		</tr>
 	      </thead>
-	      <tbody>
 		{% for name in teams %}
+	      <tbody>
 		<tr>
-		  <button type="Submit" name="Submit" class="btn btn-primary btn-lg" style="width:300px" value="{{name}}">{{ name }}</button>
+		<td>
+		  <a href="/pieces" name="Submit" class="btn btn-primary btn-block" style="width:300px" value="{{name}}">{{ name }}</a>
+</td>
 		</tr>
+		</tbody>
 		{% endfor %}
-	      </tbody>
 	    </table>
 	  </div>
 	</div>
