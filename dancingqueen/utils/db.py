@@ -78,6 +78,7 @@ def createteam(name,leader):
     c.execute('INSERT INTO members VALUES("%d", 1, "%s");' %(number, name))
     db.commit()
     db.close()
+    return number
 
 def getteamid(name,leader):
     db = sqlite3.connect(f)
