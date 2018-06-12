@@ -1,4 +1,4 @@
-var users = {{ data }};
+var users = {{ data }}
 
 var button = document.getElementById("search");
 var list = document.getElementById("thelist");
