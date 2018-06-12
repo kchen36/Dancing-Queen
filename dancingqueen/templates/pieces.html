@@ -11,9 +11,13 @@
 
 {% block content %}
 	<div class="body" style="margin:0 5em;">
-	Welcome user! This is the page for each team. <br>
-	<a href="/create_piece" type="button" class="btn btn-info btn-lg btn-block">Create New Piece</a> <br>
-The buttons below will allow you to view each piece in a team. <br>
-	<button type="button"> View </button>
+	<h1 class="text-center">Welcome user! This is the page for {{ team_name }}</h1>. <br><br>
+	<a href="/create_piece" type="button" class="btn btn-primary btn-block">Create New Piece</a> <br><br>
+	<h4 class="text-center">The buttons below will allow you to view each piece for this team.</h4> <br>
+	<form method="POST" action="/view_piece">
+	  {% for piece in pieces %}
+	  <button class="btn btn-info" type="submit" name="p" value="{{ piece.id }}"> {{piece.name}} </button>
+	  {% endfor %}
+	</form>
 	</div>
 {% endblock %}

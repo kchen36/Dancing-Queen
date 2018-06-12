@@ -10,7 +10,7 @@ def createtables():
     c.execute('CREATE TABLE IF NOT EXISTS teams (name STRING, id INTEGER PRIMARY KEY);')
     c.execute('CREATE TABLE IF NOT EXISTS members (id INTEGER, leader BIT,name STRING);')
     c.execute('CREATE TABLE IF NOT EXISTS permissions(id INTEGER, user STRING);')
-    c.execute('CREATE TABLE IF NOT EXISTS pieces(teamid INTEGER, pieceid INTEGER PRIMAY KEY, song STRING, path STRING, name STRING, length INTEGER, width INTEGER, rows INTEGER, columns INTEGER, privacy BIT);')
+    c.execute('CREATE TABLE IF NOT EXISTS pieces(teamid INTEGER, pieceid INTEGER PRIMAY KEY, name STRING, rows INTEGER, columns INTEGER);')
     c.execute('CREATE TABLE IF NOT EXISTS formations(id INTEGER,formid INTEGER, dancer STRING, x INTEGER, y INTEGER, time INTEGER, tag STRING);')
     db.close()
 
@@ -75,9 +75,22 @@ def createteam(name,leader):
     if result[0][0] != None:
         number = result[0][0] + 1
     c.execute('INSERT INTO teams VALUES("%s", "%d");' %(name, number))
-    c.execute('INSERT INTO members VALUES("%d", 1, "%s");' %(number, name))
+    c.execute('INSERT INTO members VALUES("%d", 1, "%s");' %(number, leader))
     db.commit()
     db.close()
+    return number
+
+def getteamid(name,leader):
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('SELECT id FROM teams WHERE name = "%s";' %(name) )
+    results = c.fetchall()
+    c.execute('SELECT id FROM members WHERE leader = 1 AND name = "%s";' %( leader))
+    results2 = c.fetchall()
+    for x in results:
+        for y in results2:
+            if x == y:
+                return x[0][0]
     
 def getname(teamid):
     db = sqlite3.connect(f)
@@ -153,6 +166,8 @@ def getteams(username):
     result = c.fetchall()
     db.commit()
     db.close()
+    for x in result:
+        result
     return result
 
 #removes a person's permission to edit a piece
@@ -196,7 +211,7 @@ def delform(pieceid, num, dancer, x, y, time, tag):
     db.commit()
     db.close()
     
-def addpiece(teamid, song, path, name, length, width, rows, columns, privacy):
+def addpiece(teamid, name, length, width, rows, columns):
     db = sqlite3.connect(f)
     c = db.cursor()
     number = 0
@@ -204,7 +219,7 @@ def addpiece(teamid, song, path, name, length, width, rows, columns, privacy):
     result = c.fetchall()
     if result[0][0] != None:
         number = result[0][0] + 1
-    c.execute('INSERT INTO pieces VALUES("%d", "%d","%s", "%s" , "%s", "%d", "%d", "%d", "%d", "%d");' %(teamid, number, song, path, name, length, width, rows, columns, privacy) )
+    c.execute('INSERT INTO pieces VALUES("%d", "%d", "%s", "%d", "%d");' %(teamid, number, name, rows, columns ))
     db.commit()
     db.close()
 
