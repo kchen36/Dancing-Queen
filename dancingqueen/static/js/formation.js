@@ -118,6 +118,14 @@ function parseFormationData(data){
     json = JSON.parse(data);
 }
 
+function getOffset(el) {
+  el = el.getBoundingClientRect();
+  return {
+    left: el.left + window.scrollX,
+    top: el.top + window.scrollY
+  }
+}
+
 function getWidth(){
     return json['stageSize']['length'] + 2;
 }
@@ -162,9 +170,17 @@ function updateModifications(users,formation){
 
 //function that sets everything up
 //to be run at the beginning
+var offSetX = null;
+var offSetY = null;
 function initialize(){
     parseFormationData(data);
     svg = d3.select('#svg_id')
+    parseFormationData(data);
+    svg = d3.select('#svg_id');
+    var offSet = getOffset(svg.node());
+    offSetX = offSet.left;
+    offSetY = offSet.top;
+    svg
 	.attr('width',scaleToScreen(getWidth()))
 	.attr('height',scaleToScreen(getHeight()))
 	.attr('draggable',true);
@@ -190,16 +206,13 @@ function startDragUser(event){
 function dragUser(event){
     if(selectedElement != null){
 	event.preventDefault();
-	xcor = revScaleToScreen(event.clientX);
-	ycor = revScaleToScreen(event.clientY);
+	xcor = revScaleToScreen(event.clientX - offSetX);
+	ycor = revScaleToScreen(event.clientY - offSetY);
 	if (!(xcor < 1 || ycor < 1 || xcor > getWidth() - 1 || ycor > getHeight() - 1)){
 	    user = d3.select(selectedElement)
-		.attr('transform','translate(' + event.clientX + ',' + event.clientY + ')');
+		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
 	    tag = svg.selectAll('#tag')
-		.filter(function(tag){
-		    return (tag.attr('username') == user.attr('username'))
-		})
-		.attr('transform','translate(' + event.clientX + ',' + event.clientY + ')');
+		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY + ')');
 	    currentModifications[user.attr('username')]['xcor'] = xcor;
 	    currentModifications[user.attr('username')]['ycor'] = ycor;
 	}
@@ -376,11 +389,10 @@ function btn_add_formation(){
     for(var key in currentFormation['userTags']){
 	frame['userTags'][key] = {};
 	frame['userTags'][key] = currentFormation['userTags'][key];
-	insertSlide(json,formatioNum + 1, frame);
+	insertSlide(json,formationNum + 1, frame);
 	updateCurrentFormationDiv()
     }
-}
-
+} 
 function btn_next(){
     instant = 0;
     if(formationNum < json['formations'][formationNum]){
