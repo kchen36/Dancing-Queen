@@ -52,6 +52,8 @@ using d3
 var json = null;
 var currentFormation = null;
 var currentModifications = null;
+var nameInput = document.getElementById('name').value;
+var tagInput = document.getElementById('tag').value;
 
 function parseFormationData(data){
     json = JSON.parse(data);
@@ -208,7 +210,7 @@ function moveUsers(formation){
 				.text(formation['userTags'][user.attr('username')])
 				.transition()
 				.attr('transform','translate(' + cx + ',' + cy + ')')
-				.duration(formation['timeTillNext'] * 1000);
+				.duration(formation['timeTillNext'] * 1000 * instant);
 			});
 	svg.selectAll('#tag')
 		.each(function(){
@@ -219,7 +221,7 @@ function moveUsers(formation){
 				.html(tag['username'] + ':' + formation['userTags'][tag.attr('username')])
 				.transition()
 				.attr('transform','translate(' + x + ',' + y + ')')
-				.duration(formation['timeTillNext'] * 1000);
+				.duration(formation['timeTillNext'] * 1000 * instant);
 			});
 }
 
@@ -254,18 +256,37 @@ function save(){
 }
 
 function updateCurrentFormationDiv(){
+	var cf = d3.select('#current_formation');
+	var s = "";
+	for(int i = 0; i < formationNum; i++){
+		s = s + i + ' ';
+	}
+	s = s + '*' + formationNum + '* ';
+	for(int i = formationNum + 1; i < json['formations'].length; i++){
+		s = s + 1 + ' ';
+	}
+	cf.html(s);
 }
 
 function btn_previous(){
+	instant = 0;
 	if(formationNum > 0){
 		formationNum -= 1;
 		switchFormation(json['formations'][formationNum]);
+		instant = 1;
+		updateCurrentFormationDiv()
+		return true;
 	}
+	instant = 1;
+	updateCurrentFormationDiv()
+	return false;
 }
 
 function btn_del_formation(){
-	btn_previous();
-	removeSlide(json,formationNum + 1);
+	if(btn_previous()){
+		removeSlide(json,formationNum + 1);
+	}
+	updateCurrentFormationDiv()
 }
 
 function btn_play(){
@@ -273,9 +294,12 @@ function btn_play(){
 	switchFormation(json['formations'][0])
 	instant = 1;
 	for(var i = 0; i < json['formations'].length; i++){
+		formationNum = i;
+		updateCurrentFormationDiv()
 		switchFormation(json['formations'][i]);
 	}
 	formationNum = json['formations'].length;
+	updateCurrentFormationDiv()
 }
 
 function btn_add_formation(){
@@ -292,18 +316,26 @@ function btn_add_formation(){
 		frame['userTags'][key] = {};
 		frame['userTags'][key] = currentFormation['userTags'][key];
 	insertSlide(json,formatioNum + 1, frame);
+	updateCurrentFormationDiv()
 }
 
 function btn_next(){
+	instant = 0;
 	if(formationNum < json['formations'][formationNum]){
 		formationNum += 1;
 		switchFormation(json['formations'][formationNum]);
+		instant = 1;
+		updateCurrentFormationDiv()
+		return true;
 	}
+	instant = 1;
+	updateCurrentFormationDiv()
+	return false;
 }
 
 function btn_create(){
-	var name = document.getElementById('name').value;
-	var tag = document.getElementById('tag').value;
+	var name = nameInput.value;
+	var tag = tagInput.value;
 	for(int i = 0; i < json['users'].length; i++){
 		if(json['users'][i]['username'] == name){
 			return;
@@ -314,11 +346,39 @@ function btn_create(){
 		json['formations'][i]['userMovements'][name] = {'xcor':1,'ycor':1};
 		json['formations'][i]['userTags'][name] = tag;
 	}
-	var users = [
+	var users = [{'username':name,'color':'blue'}];
+	addGroup(user,currentFormation);
 }
 
 function btn_update(){
+	var tag = currentFormation['userTags'][nameInput.value];
+	if(tag != undefined){
+		currentFormation['userTags'][nameInput.value] = tagInput.value;
+	}
+	instant = 0;
+	moveUsers(currentFormation);
+	instant = 1;
 }
 
 function btn_del_circle(){
+	var name = nameInput.value;
+	for(int i = 0; i < json['users'].length; i++){
+		if(json['users'][i]['username'] == name){
+			delete json['users'][i];
+			break;
+		}
+	}
+	for(int i = 0; i < json['formations']; i++){
+		delete json['formations']['userMovements'][name];
+		delete json['formations']['userTags'][name];
+		break;
+	}
+	svg.selectAll('#user')
+		.filter(function(user){return user.attr('username') == name;})
+		.node()
+		.remove();
+	svg.selectAll('#tag')
+		.filter(function(tag){return tag.attr('username') == name;})
+		.node()
+		.remove();
 }

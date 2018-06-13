@@ -67,6 +67,7 @@ function getHeight(){
 
 var svg = null;
 
+var formationNum = 0;
 function getScreenSize(){
 	x = screen.height;
 	y = screen.height;
@@ -196,6 +197,7 @@ function addGroup(users,formation){
 			})
 }
 
+var instant = 1;
 function moveUsers(formation){
 	svg.selectAll('#user')
 		.each(function(){
@@ -251,6 +253,75 @@ function save(){
 	updateModifications(currentFormation);
 }
 
+function updateCurrentFormationDiv(){
+}
+
+function btn_previous(){
+	if(formationNum > 0){
+		formationNum -= 1;
+		switchFormation(json['formations'][formationNum]);
+	}
+}
+
+function btn_del_formation(){
+	btn_previous();
+	removeSlide(json,formationNum + 1);
+}
+
+function btn_play(){
+	instant = 0;
+	switchFormation(json['formations'][0])
+	instant = 1;
+	for(var i = 0; i < json['formations'].length; i++){
+		switchFormation(json['formations'][i]);
+	}
+	formationNum = json['formations'].length;
+}
+
+function btn_add_formation(){
+	var frame = {};
+	frame['timeTillNext'] = 1;
+	frame['userMovements'] = {};
+	var current = currentFormation['userMovements'];
+	for(var key in currentFormation['userMovements']){
+		frame['userMovements'][key] = {};
+		frame['userMovements'][key]['xcor'] = current[key]['xcor'];
+		frame['userMovements'][key]['ycor'] = current[key]['ycor'];
+	frame['userTags'] = {};
+	for(var key in currentFormation['userTags']){
+		frame['userTags'][key] = {};
+		frame['userTags'][key] = currentFormation['userTags'][key];
+	insertSlide(json,formatioNum + 1, frame);
+}
+
+function btn_next(){
+	if(formationNum < json['formations'][formationNum]){
+		formationNum += 1;
+		switchFormation(json['formations'][formationNum]);
+	}
+}
+
+function btn_create(){
+	var name = document.getElementById('name').value;
+	var tag = document.getElementById('tag').value;
+	for(int i = 0; i < json['users'].length; i++){
+		if(json['users'][i]['username'] == name){
+			return;
+		}
+	}
+	json['users'].push({'username':name,'color':'blue'});
+	for(int i = 0; i < json['formations'].length; i++){
+		json['formations'][i]['userMovements'][name] = {'xcor':1,'ycor':1};
+		json['formations'][i]['userTags'][name] = tag;
+	}
+	var users = [
+}
+
+function btn_update(){
+}
+
+function btn_del_circle(){
+}
 testJson = {
 				"pieceName":"testPiece",
 				"stageSize":{
