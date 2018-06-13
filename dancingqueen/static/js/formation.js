@@ -154,6 +154,9 @@ function dragUser(event){
 	    user = d3.select(selectedElement)
 		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
 	    tag = svg.selectAll('#tag')
+		.filter(function(tag){
+				return tag.attr('username') == user.attr('username');
+			})
 		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
 	    currentModifications[user.attr('username')]['xcor'] = xcor;
 	    currentModifications[user.attr('username')]['ycor'] = ycor;
@@ -241,6 +244,7 @@ function moveUsers(formation){
 }
 
 function switchFormation(formation){
+	save();
     currentFormation = formation;
     updateModifications(json.users,formation);
     moveUsers(formation);
@@ -266,8 +270,8 @@ function insertSlide(json,index,item){
 }
 
 function save(){
-    currentFormation['userMovements'] = currentModifications;
-    updateModifications(currentFormation);
+    json[formationNum]['userMovements'] = currentModifications;
+    updateModifications(json['users'],currentFormation);
 }
 
 function updateCurrentFormationDiv(){
@@ -278,7 +282,7 @@ function updateCurrentFormationDiv(){
     }
     s = s + '*' + formationNum + '* ';
     for(var i = formationNum + 1; i < json['formations'].length; i++){
-	s = s + 1 + ' ';
+	s = s + i + ' ';
     }
     cf.html(s);
 }
@@ -286,8 +290,8 @@ function updateCurrentFormationDiv(){
 function btn_previous(){
     instant = 0;
     if(formationNum > 0){
-	formationNum -= 1;
 	switchFormation(json['formations'][formationNum]);
+	formationNum -= 1;
 	instant = 1;
 	updateCurrentFormationDiv()
 	return true;
@@ -331,11 +335,12 @@ function btn_add_formation(){
     for(var key in currentFormation['userTags']){
 	frame['userTags'][key] = {};
 	frame['userTags'][key] = currentFormation['userTags'][key];
+	}
 	insertSlide(json,formationNum + 1, frame);
 	updateCurrentFormationDiv()
-    }
 } 
 function btn_next(){
+<<<<<<< HEAD
     instant = 0;
     if(formationNum < json['formations'][formationNum]){
 	formationNum += 1;
@@ -347,6 +352,19 @@ function btn_next(){
     instant = 1;
     updateCurrentFormationDiv()
     return false;
+=======
+	instant = 0;
+	if(formationNum < json['formations'].length){
+	    switchFormation(json['formations'][formationNum]);
+	    formationNum += 1;
+	    instant = 1;
+	    updateCurrentFormationDiv()
+	    return true;
+	}
+	instant = 1;
+	updateCurrentFormationDiv();
+	return false;
+>>>>>>> e414095c219e6485a961846cd045bda0f001fbc6
 }
 
 function btn_create(){
