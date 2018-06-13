@@ -98,7 +98,10 @@ def jsfile():
 def pieces():
     if request.method == "POST":
         team_id = request.form.get('Submit')
-        pieces = db.getpieces(int(team_id))
+        pieces_data = db.getpieces(int(team_id))
+        pieces = []
+        for piece in pieces_data:
+            pieces.append({"team_id":piece[0], "piece_id":piece[1], "name":piece[2]})#didn't include rows and columns but its possible
     return render_template('pieces.html',
                            team_name = db.getname(int(team_id)),
                            team_id = team_id,
@@ -107,7 +110,6 @@ def pieces():
 @app.route('/create_piece', methods=["GET","POST"])
 @auth.in_session
 def create_piece():
-    #team_leader = auth.session['username']
     if request.method == 'POST':
         team_id = request.form.get('team_id')
         name = request.form.get('piece_name')
@@ -120,13 +122,11 @@ def create_piece():
 @app.route('/view_piece', methods=["GET","POST"])
 @auth.in_session
 def view_piece():
-    if request.method == 'POST':
-        name = request.form.get('p')
-        team_id = db.addpiece(name, columns, rows)
-        #piece_id = request.form.get('p')
+    #if request.method == 'POST':
+    #piece_id = request.form.get('p')
     return render_template('view_pieces.html') #, piece_id = piece_id)
 
     
 if __name__ == '__main__':
     app.debug = True
-    app.run(host="127.0.0.1", port=5001)
+    app.run()

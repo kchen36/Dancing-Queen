@@ -215,7 +215,7 @@ def addpiece(teamid, name, rows, columns):
     db = sqlite3.connect(f)
     c = db.cursor()
     number = 0
-    c.execute('SELECT MAX(id) FROM teams;')
+    c.execute('SELECT MAX(pieceid) FROM pieces;')
     result = c.fetchall()
     if result[0][0] != None:
         number = result[0][0] + 1

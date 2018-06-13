@@ -150,3 +150,6 @@ worked on formation.js
 WongE -- 2018-06-12 17:07:02
 worked on foramtion.js
 
+ahmedF -- 2018-06-13 01:03:17
+putting things together, pieces works, view_pieces needs to connect with the js
+
