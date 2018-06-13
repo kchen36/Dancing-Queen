@@ -267,7 +267,7 @@ function insertSlide(json,index,item){
 }
 
 function save(){
-    currentFormation['userMovements'] = currentModifications;
+    json[formationNum]['userMovements'] = currentModifications;
     updateModifications(json['users'],currentFormation);
 }
 
@@ -287,8 +287,8 @@ function updateCurrentFormationDiv(){
 function btn_previous(){
     instant = 0;
     if(formationNum > 0){
-	formationNum -= 1;
 	switchFormation(json['formations'][formationNum]);
+	formationNum -= 1;
 	instant = 1;
 	updateCurrentFormationDiv()
 	return true;
@@ -339,8 +339,8 @@ function btn_add_formation(){
 function btn_next(){
 	instant = 0;
 	if(formationNum < json['formations'].length){
-	    formationNum += 1;
 	    switchFormation(json['formations'][formationNum]);
+	    formationNum += 1;
 	    instant = 1;
 	    updateCurrentFormationDiv()
 	    return true;
