@@ -124,8 +124,31 @@ def create_piece():
 def view_piece():
     if request.method == 'POST':
         piece_name = request.form.get('p')
-        
-    return render_template('view_pieces.html') #, piece_id = piece_id)
+        team_id = request.form.get('piece_team')
+        data = {'pieceName': piece_name,
+                'stageSize':{
+	            'length':10,
+	            'width' :5,
+                },
+                "songInfo" :{
+	            "songName"  :"abcSong",
+	            "songLength":300,
+                },
+                'users' : [],
+                'formations' : [
+                    { 'timeTillNext': 1,
+                      'userMovements':{},
+                      'userTags' :{}
+                    }
+                ],
+        }
+        members = []
+        for member in db.getmembers(int(team_id)):
+            members.append({"username": member[0], "color": "blue"})
+            data["formations"][0]["userMovements"][str(member[0])] = {"xcor":1,"ycor":1}
+            data["formations"][0]["userTags"][str(member[0])] = ""
+        data["users"] = members
+    return render_template('view_pieces.html', data = json.dumps(data))
 
     
 if __name__ == '__main__':

@@ -24,15 +24,12 @@
   <svg id="svg_id" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid black">
   </svg> <br><br>
   <form method="POST" action="">
-    <input type="text" style="display: none;" id="info" value="" name="data" class="form-control"/>
+    <input type="text" style="display: none;" id="data" value="{{data}}" name="data" class="form-control"/>
     <button type="submit" id="saveinfo" class="btn btn-primary btn-lg btn-block" name="Submit" onclick="btn_save()"> Save Piece </button>
   </form>
 </div>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="{{ url_for('static', filename='js/formation.js') }}" type="text/javascript"> </script>
 <script id='json' type="text/javascript">
-</script>
-<script type="text/javascript">
-initialize();
 </script>
 {% endblock %}

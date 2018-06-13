@@ -54,65 +54,7 @@ var currentFormation = null;
 var currentModifications = null;
 var nameInput = document.getElementById('name').value;
 var tagInput = document.getElementById('tag').value;
-var initialJson =  {
-    "pieceName":"testPiece",
-    "stageSize":{
-	"length":10,
-	"width" :5,
-    },
-    "songInfo" :{
-	"songName"  :"abcSong",
-	"songLength":300,
-    },
-    "users"    :[
-	{
-	    "username":"edmond",
-	    "color"   :"red",
-	},
-	{
-	    "username":"kerry",
-	    "color"   :"blue",
-	},
-	{
-	    "username":"fabiha",
-	    "color"   :"green",
-	},
-	{
-	    "username":"philip",
-	    "color"   :"black",
-	},
-    ],
-    "formations":[
-	{
-	    "timeTillNext" :1,
-	    "userMovements":{
-		"edmond":{
-		    "xcor":5,
-		    "ycor":2.5,
-		},
-		"kerry" :{
-		    "xcor":0,
-		    "ycor":0,
-		},
-		"fabiha":{
-		    "xcor":2,
-		    "ycor":5,
-		},
-		"philip":{
-		    "xcor":10,
-		    "ycor":3,
-		},
-	    },
-	    "userTags"     :{
-		"edmond":"tag0",
-		"kerry" :"tag1",
-		"fabiha":"tag with new line\nfor testing",
-		"philip":"extra long tag for testing",
-	    },
-	},
-
-    ],
-};
+var data = document.getElementById('data').getAttribute('value')
 
 function parseFormationData(data){
     json = JSON.parse(data);
@@ -212,7 +154,7 @@ function dragUser(event){
 	    user = d3.select(selectedElement)
 		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
 	    tag = svg.selectAll('#tag')
-		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY + ')');
+		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
 	    currentModifications[user.attr('username')]['xcor'] = xcor;
 	    currentModifications[user.attr('username')]['ycor'] = ycor;
 	}
@@ -462,4 +404,4 @@ function btn_save() {
     saveinfo.setAttribute('value', json);
 }
 
-//window.onload = initialize();
+window.onload = initialize();

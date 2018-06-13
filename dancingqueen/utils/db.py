@@ -152,6 +152,18 @@ def getteams(username):
         result
     return result
 
+#returns all the members of a team  
+def getmembers(teamid):
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    c.execute('SELECT name FROM members WHERE id ="%d"' %(teamid))
+    result = c.fetchall()
+    db.commit()
+    db.close()
+    for x in result:
+        result
+    return result
+
 #removes a person's permission to edit a piece
 def removepermission(pieceid,user):
     db = sqlite3.connect(f)
