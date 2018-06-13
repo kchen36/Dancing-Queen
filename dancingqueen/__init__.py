@@ -100,25 +100,30 @@ def pieces():
         team_id = request.form.get('Submit')
         pieces = db.getpieces(int(team_id))
     return render_template('pieces.html',
-                               team_name = db.getname(int(team_id)),
-                               pieces = pieces)
+                           team_name = db.getname(int(team_id)),
+                           team_id = team_id,
+                           pieces = pieces)
 
 @app.route('/create_piece', methods=["GET","POST"])
 @auth.in_session
 def create_piece():
-    team_leader = auth.session['username']
+    #team_leader = auth.session['username']
     if request.method == 'POST':
+        team_id = request.form.get('team_id')
         name = request.form.get('piece_name')
         columns = request.form.get('columns')
         rows = request.form.get('rows')
-        team_id = db.addpiece(name, columns, rows)
-    return render_template('create_piece.html')
+        if team_id != None and columns != None:
+            db.addpiece(int(team_id), name, int(rows), int(columns))
+    return render_template('create_piece.html', team_id = team_id)
 
 @app.route('/view_piece', methods=["GET","POST"])
 @auth.in_session
 def view_piece():
-    #if request.method == "POST":
-    #   piece_id = request.form.get('p')
+    if request.method == 'POST':
+        name = request.form.get('p')
+        team_id = db.addpiece(name, columns, rows)
+        #piece_id = request.form.get('p')
     return render_template('view_pieces.html') #, piece_id = piece_id)
 
     

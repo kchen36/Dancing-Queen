@@ -12,7 +12,9 @@
 {% block content %}
 	<div class="body" style="margin:0 5em;">
 	<h1 class="text-center">Welcome user! This is the page for {{ team_name }}</h1>. <br><br>
-	<a href="/create_piece" type="button" class="btn btn-primary btn-block">Create New Piece</a> <br><br>
+	<form method="POST" action="/create_piece">
+	  <button type="submit" class="btn btn-primary btn-block" name="team_id" value="{{team_id}}">Create New Piece</button>
+	</form><br><br>
 	<h4 class="text-center">The buttons below will allow you to view each piece for this team.</h4> <br>
 	<form method="POST" action="/view_piece">
 	  {% for piece in pieces %}

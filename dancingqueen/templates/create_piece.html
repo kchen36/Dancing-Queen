@@ -13,7 +13,8 @@
 {% block content %}
   <div class="container">
     <h1> Create a new piece </h1>
-    <form method="POST" action="/create_piece">
+    <form method="POST" action="">
+      <input type="text" style="display: none;" value="{{team_id}}" name="team_id" class="form-control"/>
       <div class="form-group">
 	<div class="row">
 	  <div class="col-lg-3">
