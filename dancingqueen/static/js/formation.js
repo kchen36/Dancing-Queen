@@ -104,6 +104,7 @@ function updateModifications(users,formation){
 //function that sets everything up
 //to be run at the beginning
 function initialize(){
+	parseFormationData(data);
     svg = d3.select('#svg_id')
 	.attr('width',scaleToScreen(getWidth()))
 	.attr('height',scaleToScreen(getHeight()))
