@@ -11,16 +11,16 @@
 
 {% block content %}
 <div class="container">
-  <button class="btn btn-primary" id="previous" onclick="btn_previous"> << </button>
-  <button class="btn btn-primary" id="del_formation" onclick="btn_del_formation"> - </button>
-  <button class="btn btn-primary" id="play" onclick="btn_play"> Play </button>
-  <button class="btn btn-primary" id="add_formation" onclick="btn_add_formation"> + </button>
-  <button class="btn btn-primary" id="next" onclick="btn_next"> >> </button> <div id="current_formation"> Current Formation </div><br><br>
+  <button class="btn btn-primary" id="previous" onclick="btn_previous()"> << </button>
+  <button class="btn btn-primary" id="del_formation" onclick="btn_del_formation()"> - </button>
+  <button class="btn btn-primary" id="play" onclick="btn_play()"> Play </button>
+  <button class="btn btn-primary" id="add_formation" onclick="btn_add_formation()"> + </button>
+  <button class="btn btn-primary" id="next" onclick="btn_next()"> >> </button> <div id="current_formation"> Current Formation </div><br><br>
   <input type="text" id="name" placeholder="Name">
   <input type="text" id="tag" placeholder="Notes">
-  <button class="btn btn-primary" id="create" onclick="btn_add_formation.btn_create"> Create Circle </button>
-  <button class="btn btn-primary" id="update" onclick="btn_update"> Update Circle </button> <br><br>
-  <button class="btn btn-primary" id="del_circle" onclick="btn_del_circle"> Delete Circle </button> <br><br>
+  <button class="btn btn-primary" id="create" onclick="btn_create()"> Create Circle </button>
+  <button class="btn btn-primary" id="update" onclick="btn_update()"> Update Circle </button> <br><br>
+  <button class="btn btn-primary" id="del_circle" onclick="btn_del_circle()"> Delete Circle </button> <br><br>
   <svg id="svg_id" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid black">
   </svg>
 </div>
