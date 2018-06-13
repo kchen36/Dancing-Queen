@@ -241,6 +241,7 @@ function moveUsers(formation){
 }
 
 function switchFormation(formation){
+	save();
     currentFormation = formation;
     updateModifications(json.users,formation);
     moveUsers(formation);
@@ -267,7 +268,7 @@ function insertSlide(json,index,item){
 
 function save(){
     currentFormation['userMovements'] = currentModifications;
-    updateModifications(currentFormation);
+    updateModifications(json['users'],currentFormation);
 }
 
 function updateCurrentFormationDiv(){
@@ -278,7 +279,7 @@ function updateCurrentFormationDiv(){
     }
     s = s + '*' + formationNum + '* ';
     for(var i = formationNum + 1; i < json['formations'].length; i++){
-	s = s + 1 + ' ';
+	s = s + i + ' ';
     }
     cf.html(s);
 }
