@@ -100,14 +100,7 @@ function revScaleToScreen(n){
 }
 
 function updateModifications(users,formation){
-    for(var i = 0; i < users.length; i++){
-		var username = users[i]['username'];
-		var x = formation['userMovements'][username]['xcor'];
-		var y = formation['userMovements'][username]['ycor'];
-		currentModifications[username] = {};
-		currentModifications[username]['xcor'] = x;
-		currentModifications[username]['ycor'] = y;
-    }
+	return
 }
 
 //function that sets everything up
@@ -154,11 +147,11 @@ function dragUser(event){
 	if (!(xcor < 1 || ycor < 1 || xcor > getWidth() - 1 || ycor > getHeight() - 1)){
 	    user = d3.select(selectedElement)
 		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
-	    tag = svg.selectAll('#tag')
-		.filter(function(t){
-				return true
-			})
-		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
+//	    tag = svg.selectAll('#tag')
+//		.filter(function(t){
+// 		    return (tag.attr('username') == user.attr('username'))
+// 		})
+//		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
 	    currentFormation['userMovements'][user.attr('username')]['xcor'] = xcor;
 	    currentFormation['userMovements'][user.attr('username')]['ycor'] = ycor;
 	}
@@ -329,8 +322,8 @@ function btn_add_formation(){
 		frame['userMovements'][key] = {};
 		frame['userMovements'][key]['xcor'] = current[key]['xcor'];
 		frame['userMovements'][key]['ycor'] = current[key]['ycor'];
-		frame['userTags'] = {};
     }
+	frame['userTags'] = {};
     for(var key in currentFormation['userTags']){
 		frame['userTags'][key] = {};
 		frame['userTags'][key] = currentFormation['userTags'][key];
