@@ -337,7 +337,7 @@ function btn_add_formation(){
 } 
 function btn_next(){
 	instant = 0;
-	if(formationNum < json['formations'][formationNum]){
+	if(formationNum < json['formations'].length){
 	    formationNum += 1;
 	    switchFormation(json['formations'][formationNum]);
 	    instant = 1;
