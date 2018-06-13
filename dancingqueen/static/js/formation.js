@@ -385,4 +385,9 @@ function btn_add_formation(){
     }
 }
 
+function btn_save() {
+     var saveinfo = document.getElementById('info');
+     saveinfo.setAttribute('value', json);
+}
+
 //window.onload = initialize();
