@@ -151,9 +151,6 @@ function dragUser(event){
 	    user = d3.select(selectedElement)
 		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
 	    tag = svg.selectAll('#tag')
-		.filter(function(tag){
-		    return (tag.attr('username') == user.attr('username'))
-		})
 		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY + ')');
 	    currentModifications[user.attr('username')]['xcor'] = xcor;
 	    currentModifications[user.attr('username')]['ycor'] = ycor;
