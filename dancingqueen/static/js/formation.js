@@ -385,4 +385,10 @@ function btn_del_circle(){
 	    .node()
 	    .remove();
 }
+
+function btn_save() {
+     var saveinfo = document.getElementById('info');
+     saveinfo.setAttribute('value', json);
+}
+
 //window.onload = initialize();
