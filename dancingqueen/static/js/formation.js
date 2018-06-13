@@ -331,9 +331,9 @@ function btn_add_formation(){
     for(var key in currentFormation['userTags']){
 	frame['userTags'][key] = {};
 	frame['userTags'][key] = currentFormation['userTags'][key];
+	}
 	insertSlide(json,formationNum + 1, frame);
 	updateCurrentFormationDiv()
-    }
 } 
 function btn_next(){
 	instant = 0;
@@ -345,7 +345,7 @@ function btn_next(){
 	    return true;
 	}
 	instant = 1;
-	updateCurrentFormationDiv()
+	updateCurrentFormationDiv();
 	return false;
 }
 
