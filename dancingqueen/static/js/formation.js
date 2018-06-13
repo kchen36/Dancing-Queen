@@ -340,7 +340,6 @@ function btn_add_formation(){
 	updateCurrentFormationDiv()
 } 
 function btn_next(){
-<<<<<<< HEAD
     instant = 0;
     if(formationNum < json['formations'][formationNum]){
 	formationNum += 1;
@@ -352,7 +351,6 @@ function btn_next(){
     instant = 1;
     updateCurrentFormationDiv()
     return false;
-=======
 	instant = 0;
 	if(formationNum < json['formations'].length){
 	    switchFormation(json['formations'][formationNum]);
@@ -364,7 +362,6 @@ function btn_next(){
 	instant = 1;
 	updateCurrentFormationDiv();
 	return false;
->>>>>>> e414095c219e6485a961846cd045bda0f001fbc6
 }
 
 function btn_create(){
@@ -418,7 +415,7 @@ function btn_del_circle(){
 }
 
 function btn_save() {
-    var saveinfo = document.getElementById('info');
+    var saveinfo = document.getElementById('output');
     saveinfo.setAttribute('value', json);
 }
 

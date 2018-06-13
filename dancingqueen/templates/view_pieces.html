@@ -24,8 +24,12 @@
   <svg id="svg_id" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid black">
   </svg> <br><br>
   <form method="POST" action="">
+    <input type="text" style="display: none;" value="{{piece_name}}" name="p" class="form-control"/>
+    <input type="text" style="display: none;" value="{{team_id}}" name="piece_team" class="form-control"/>
     <input type="text" style="display: none;" id="data" value="{{data}}" name="data" class="form-control"/>
-    <button type="submit" id="saveinfo" class="btn btn-primary btn-lg btn-block" name="Submit" onclick="btn_save()"> Save Piece </button>
+    <input type="text" style="display: none;" id="output" name="output" class="form-control"/>
+    <button type="button" id="saveinfo" class="btn btn-primary btn-lg" onclick="btn_save()"> Save Piece </button>
+    <button type="submit" class="btn btn-primary btn-lg" name="Submit"> Create Piece </button>
   </form>
 </div>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>

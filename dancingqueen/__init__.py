@@ -124,7 +124,14 @@ def create_piece():
 def view_piece():
     if request.method == 'POST':
         piece_name = request.form.get('p')
+        piece_id = request.form.get('piece_id')
         team_id = request.form.get('piece_team')
+        output = request.form.get('output')
+        #for i in output:
+        #usr = output["users"][i].username
+        #addform(piece_id, num = 1, usr, output['formations'][i]['userMovements'][str(usr)]['xcor'], output['formations'][i]['userMovements'][str(usr)]['ycor'], time = 1, tag = ""):
+        # ^^^^^^^^^^^^IDK what num is^^^^^^^^^^^^^^^^^^
+        #print "output: ", output
         data = {'pieceName': piece_name,
                 'stageSize':{
 	            'length':10,
@@ -148,7 +155,10 @@ def view_piece():
             data["formations"][0]["userMovements"][str(member[0])] = {"xcor":1,"ycor":1}
             data["formations"][0]["userTags"][str(member[0])] = ""
         data["users"] = members
-    return render_template('view_pieces.html', data = json.dumps(data))
+    return render_template('view_pieces.html',
+                           piece_name = piece_name,
+                           team_id = team_id,
+                           data = json.dumps(data))
 
     
 if __name__ == '__main__':

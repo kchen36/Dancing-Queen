@@ -153,3 +153,6 @@ worked on foramtion.js
 ahmedF -- 2018-06-13 01:03:17
 putting things together, pieces works, view_pieces needs to connect with the js
 
+ahmedF -- 2018-06-13 04:42:58
+possible way to add formation to database, but completely untested
+

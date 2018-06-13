@@ -19,6 +19,7 @@
 	<form method="POST" action="/view_piece">
 	  {% for piece in pieces %}
 	  <input type="text" style="display: none;" value="{{piece.team_id}}" name="piece_team" class="form-control"/>
+	  <input type="text" style="display: none;" value="{{piece.piece_id}}" name="piece_id" class="form-control"/>
 	  <button class="btn btn-primary" type="submit" name="p" value="{{ piece.name }}"> {{piece.name}} </button> <br> <br>
 	  {% endfor %}
 	</form>
