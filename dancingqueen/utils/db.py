@@ -10,7 +10,7 @@ def createtables():
     c.execute('CREATE TABLE IF NOT EXISTS teams (name STRING, id INTEGER PRIMARY KEY);')
     c.execute('CREATE TABLE IF NOT EXISTS members (id INTEGER, leader BIT,name STRING);')
     c.execute('CREATE TABLE IF NOT EXISTS permissions(id INTEGER, user STRING);')
-    c.execute('CREATE TABLE IF NOT EXISTS pieces(teamid INTEGER, pieceid INTEGER PRIMAY KEY, name STRING, rows INTEGER, columns INTEGER);')
+    c.execute('CREATE TABLE IF NOT EXISTS pieces(teamid INTEGER, pieceid INTEGER PRIMARY KEY, name STRING, rows INTEGER, columns INTEGER);')
     c.execute('CREATE TABLE IF NOT EXISTS formations(id INTEGER,formid INTEGER, dancer STRING, x INTEGER, y INTEGER, time INTEGER, tag STRING);')
     db.close()
 
@@ -211,7 +211,7 @@ def delform(pieceid, num, dancer, x, y, time, tag):
     db.commit()
     db.close()
     
-def addpiece(teamid, name, length, width, rows, columns):
+def addpiece(teamid, name, rows, columns):
     db = sqlite3.connect(f)
     c = db.cursor()
     number = 0
