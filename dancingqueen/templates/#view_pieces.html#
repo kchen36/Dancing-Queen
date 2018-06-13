@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>View Piece</title>
+{% endblock %}
+
+{% block navbar %}
+<li><a href="/create_team"><span class="glyphicon glyphicon-file"></span> Create Team</a></li>
+<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <button class="btn btn-primary" id="previous" onclick="btn_previous"> << </button>
+  <button class="btn btn-primary" id="del_formation" onclick="btn_del_formation"> - </button>
+  <button class="btn btn-primary" id="play" onclick="btn_play"> Play </button>
+  <button class="btn btn-primary" id="add_formation" onclick="btn_add_formation"> + </button>
+  <button class="btn btn-primary" id="next" onclick="btn_next"> >> </button> <div id="current_formation"> Current Formation </div><br><br>
+  <input type="text" id="name" placeholder="Name">
+  <input type="text" id="tag" placeholder="Notes">
+  <button class="btn btn-primary" id="create" onclick="btn_add_formation.btn_create"> Create Circle </button>
+  <button class="btn btn-primary" id="update" onclick="btn_update"> Update Circle </button> <br><br>
+  <button class="btn btn-primary" id="del_circle" onclick="btn_del_circle"> Delete Circle </button> <br><br>
+  <svg id="svg_id" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid black">
+  </svg> <br><br>
+  <form method="POST" action="">
+    <input type="text" style="display: none;" id="info" value="" name="data" class="form-control"/>
+    <button type="submit" id="saveinfo" class="btn btn-primary btn-lg btn-block" name="Submit" onclick="btn_save"> Save Piece </button>
+  </form>
+</div>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="{{ url_for('static', filename='js/formation.js') }}" type="text/javascript"> </script>
+<script id='json' type="text/javascript">
+</script>
+<script type="text/javascript">
+initialize();
+</script>
+{% endblock %}

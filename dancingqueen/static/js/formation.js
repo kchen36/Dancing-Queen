@@ -54,6 +54,65 @@ var currentFormation = null;
 var currentModifications = null;
 var nameInput = document.getElementById('name').value;
 var tagInput = document.getElementById('tag').value;
+var initialJson =  {
+    "pieceName":"testPiece",
+    "stageSize":{
+	"length":10,
+	"width" :5,
+    },
+    "songInfo" :{
+	"songName"  :"abcSong",
+	"songLength":300,
+    },
+    "users"    :[
+	{
+	    "username":"edmond",
+	    "color"   :"red",
+	},
+	{
+	    "username":"kerry",
+	    "color"   :"blue",
+	},
+	{
+	    "username":"fabiha",
+	    "color"   :"green",
+	},
+	{
+	    "username":"philip",
+	    "color"   :"black",
+	},
+    ],
+    "formations":[
+	{
+	    "timeTillNext" :1,
+	    "userMovements":{
+		"edmond":{
+		    "xcor":5,
+		    "ycor":2.5,
+		},
+		"kerry" :{
+		    "xcor":0,
+		    "ycor":0,
+		},
+		"fabiha":{
+		    "xcor":2,
+		    "ycor":5,
+		},
+		"philip":{
+		    "xcor":10,
+		    "ycor":3,
+		},
+	    },
+	    "userTags"     :{
+		"edmond":"tag0",
+		"kerry" :"tag1",
+		"fabiha":"tag with new line\nfor testing",
+		"philip":"extra long tag for testing",
+	    },
+	},
+
+    ],
+};
 
 function parseFormationData(data){
     json = JSON.parse(data);
@@ -104,7 +163,7 @@ function updateModifications(users,formation){
 //function that sets everything up
 //to be run at the beginning
 function initialize(){
-	parseFormationData(data);
+    parseFormationData(data);
     svg = d3.select('#svg_id')
 	.attr('width',scaleToScreen(getWidth()))
 	.attr('height',scaleToScreen(getHeight()))
@@ -285,7 +344,7 @@ function btn_previous(){
 
 function btn_del_formation(){
     if(btn_previous()){
-		removeSlide(json,formationNum + 1);
+	removeSlide(json,formationNum + 1);
     }
     updateCurrentFormationDiv()
 }
@@ -323,72 +382,72 @@ function btn_add_formation(){
 }
 
 function btn_next(){
-	instant = 0;
-	if(formationNum < json['formations'][formationNum]){
-	    formationNum += 1;
-	    switchFormation(json['formations'][formationNum]);
-	    instant = 1;
-	    updateCurrentFormationDiv()
-	    return true;
-	}
+    instant = 0;
+    if(formationNum < json['formations'][formationNum]){
+	formationNum += 1;
+	switchFormation(json['formations'][formationNum]);
 	instant = 1;
 	updateCurrentFormationDiv()
-	return false;
+	return true;
+    }
+    instant = 1;
+    updateCurrentFormationDiv()
+    return false;
 }
 
 function btn_create(){
-	var name = nameInput.value;
-	var tag = tagInput.value;
-	for(var i = 0; i < json['users'].length; i++){
-	    if(json['users'][i]['username'] == name){
-		return;
-	    }
+    var name = nameInput.value;
+    var tag = tagInput.value;
+    for(var i = 0; i < json['users'].length; i++){
+	if(json['users'][i]['username'] == name){
+	    return;
 	}
-	json['users'].push({'username':name,'color':'blue'});
-	for(var i = 0; i < json['formations'].length; i++){
-	    json['formations'][i]['userMovements'][name] = {'xcor':1,'ycor':1};
-	    json['formations'][i]['userTags'][name] = tag;
-	}
-	var users = [{'username':name,'color':'blue'}];
-	addGroup(user,currentFormation);
+    }
+    json['users'].push({'username':name,'color':'blue'});
+    for(var i = 0; i < json['formations'].length; i++){
+	json['formations'][i]['userMovements'][name] = {'xcor':1,'ycor':1};
+	json['formations'][i]['userTags'][name] = tag;
+    }
+    var users = [{'username':name,'color':'blue'}];
+    addGroup(user,currentFormation);
 }
 
 function btn_update(){
-	var tag = currentFormation['userTags'][nameInput.value];
-	if(tag != undefined){
-	    currentFormation['userTags'][nameInput.value] = tagInput.value;
-	}
-	instant = 0;
-	moveUsers(currentFormation);
-	instant = 1;
+    var tag = currentFormation['userTags'][nameInput.value];
+    if(tag != undefined){
+	currentFormation['userTags'][nameInput.value] = tagInput.value;
+    }
+    instant = 0;
+    moveUsers(currentFormation);
+    instant = 1;
 }
 
 function btn_del_circle(){
-	var name = nameInput.value;
-	for(var i = 0; i < json['users'].length; i++){
-	    if(json['users'][i]['username'] == name){
-		delete json['users'][i];
-		break;
-	    }
-	}
-	for(var i = 0; i < json['formations']; i++){
-	    delete json['formations']['userMovements'][name];
-	    delete json['formations']['userTags'][name];
+    var name = nameInput.value;
+    for(var i = 0; i < json['users'].length; i++){
+	if(json['users'][i]['username'] == name){
+	    delete json['users'][i];
 	    break;
 	}
-	svg.selectAll('#user')
-	    .filter(function(user){return user.attr('username') == name;})
-	    .node()
-	    .remove();
-	svg.selectAll('#tag')
-	    .filter(function(tag){return tag.attr('username') == name;})
-	    .node()
-	    .remove();
+    }
+    for(var i = 0; i < json['formations']; i++){
+	delete json['formations']['userMovements'][name];
+	delete json['formations']['userTags'][name];
+	break;
+    }
+    svg.selectAll('#user')
+	.filter(function(user){return user.attr('username') == name;})
+	.node()
+	.remove();
+    svg.selectAll('#tag')
+	.filter(function(tag){return tag.attr('username') == name;})
+	.node()
+	.remove();
 }
 
 function btn_save() {
-     var saveinfo = document.getElementById('info');
-     saveinfo.setAttribute('value', json);
+    var saveinfo = document.getElementById('info');
+    saveinfo.setAttribute('value', json);
 }
 
 //window.onload = initialize();

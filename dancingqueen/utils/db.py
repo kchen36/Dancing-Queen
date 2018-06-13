@@ -109,16 +109,6 @@ def addmember(teamid, name):
     db.commit()
     db.close()
 
-########### function no longer needed
-#gets a nickname of a person from a specific team id
-def getnick(teamid, name):
-    db = sqlite3.connect(f)
-    c = db.cursor()
-    c.execute('SELECT nickname FROM members WHERE name = "%s" AND id = "%d";' %(name, teamid))
-    result = c.fetchall()
-    db.commit()
-    db.close()
-    return result[0][0]
 
 #changes the password of a user
 def changepass(username, password):
@@ -149,14 +139,6 @@ def checkpermission(pieceid, username):
     else:
         db.close()
         return True
-########## function no longer needed    
-#changes the nickname of a member of a team  
-def editnick(teamid,member,nickname):
-    db = sqlite3.connect(f)
-    c = db.cursor()
-    c.execute('UPDATE members SET nickname = "%s" WHERE name = "%s" AND id = "%d";' %(nickname, member, teamid))
-    db.commit()
-    db.close()
 
 #returns all the teams of a user   
 def getteams(username):

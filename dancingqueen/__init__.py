@@ -122,8 +122,9 @@ def create_piece():
 @app.route('/view_piece', methods=["GET","POST"])
 @auth.in_session
 def view_piece():
-    #if request.method == 'POST':
-    #piece_id = request.form.get('p')
+    if request.method == 'POST':
+        piece_name = request.form.get('p')
+        
     return render_template('view_pieces.html') #, piece_id = piece_id)
 
     
