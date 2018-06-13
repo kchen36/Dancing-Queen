@@ -284,7 +284,7 @@ function btn_previous(){
 
 function btn_del_formation(){
     if(btn_previous()){
-	removeSlide(json,formationNum + 1);
+		removeSlide(json,formationNum + 1);
     }
     updateCurrentFormationDiv()
 }
@@ -319,8 +319,9 @@ function btn_add_formation(){
 	insertSlide(json,formatioNum + 1, frame);
 	updateCurrentFormationDiv()
     }
+}
 
-    function btn_next(){
+function btn_next(){
 	instant = 0;
 	if(formationNum < json['formations'][formationNum]){
 	    formationNum += 1;
@@ -332,9 +333,9 @@ function btn_add_formation(){
 	instant = 1;
 	updateCurrentFormationDiv()
 	return false;
-    }
+}
 
-    function btn_create(){
+function btn_create(){
 	var name = nameInput.value;
 	var tag = tagInput.value;
 	for(var i = 0; i < json['users'].length; i++){
@@ -349,9 +350,9 @@ function btn_add_formation(){
 	}
 	var users = [{'username':name,'color':'blue'}];
 	addGroup(user,currentFormation);
-    }
+}
 
-    function btn_update(){
+function btn_update(){
 	var tag = currentFormation['userTags'][nameInput.value];
 	if(tag != undefined){
 	    currentFormation['userTags'][nameInput.value] = tagInput.value;
@@ -359,9 +360,9 @@ function btn_add_formation(){
 	instant = 0;
 	moveUsers(currentFormation);
 	instant = 1;
-    }
+}
 
-    function btn_del_circle(){
+function btn_del_circle(){
 	var name = nameInput.value;
 	for(var i = 0; i < json['users'].length; i++){
 	    if(json['users'][i]['username'] == name){
@@ -382,7 +383,5 @@ function btn_add_formation(){
 	    .filter(function(tag){return tag.attr('username') == name;})
 	    .node()
 	    .remove();
-    }
 }
-
 //window.onload = initialize();
