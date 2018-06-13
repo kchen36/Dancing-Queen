@@ -101,12 +101,12 @@ function revScaleToScreen(n){
 
 function updateModifications(users,formation){
     for(var i = 0; i < users.length; i++){
-	var username = users[i]['username'];
-	var x = formation['userMovements'][username]['xcor'];
-	var y = formation['userMovements'][username]['ycor'];
-	currentModifications[username] = {};
-	currentModifications[username]['xcor'] = x;
-	currentModifications[username]['ycor'] = y;
+		var username = users[i]['username'];
+		var x = formation['userMovements'][username]['xcor'];
+		var y = formation['userMovements'][username]['ycor'];
+		currentModifications[username] = {};
+		currentModifications[username]['xcor'] = x;
+		currentModifications[username]['ycor'] = y;
     }
 }
 
@@ -115,7 +115,8 @@ function updateModifications(users,formation){
 var offSetX = null;
 var offSetY = null;
 function initialize(){
-    parseFormationData(data);
+	var df = d3.select('#data').node();
+    parseFormationData(df.value);
     svg = d3.select('#svg_id')
     parseFormationData(data);
     svg = d3.select('#svg_id');
@@ -154,12 +155,12 @@ function dragUser(event){
 	    user = d3.select(selectedElement)
 		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
 	    tag = svg.selectAll('#tag')
-		.filter(function(tag){
-				return tag.attr('username') == user.attr('username');
+		.filter(function(t){
+				return true
 			})
 		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
-	    currentModifications[user.attr('username')]['xcor'] = xcor;
-	    currentModifications[user.attr('username')]['ycor'] = ycor;
+	    currentFormation['userMovements'][user.attr('username')]['xcor'] = xcor;
+	    currentFormation['userMovements'][user.attr('username')]['ycor'] = ycor;
 	}
     }
 }
@@ -246,7 +247,6 @@ function moveUsers(formation){
 function switchFormation(formation){
 	save();
     currentFormation = formation;
-    updateModifications(json.users,formation);
     moveUsers(formation);
 }
 
@@ -260,7 +260,7 @@ function removeSlide(json,index){
 }
 
 function insertSlide(json,index,item){
-    if(index >= 0 && index < json['formations'].length){
+    if(index >= 0 && index <= json['formations'].length){
 	json['formations'].splice(index,0,item)
 	return true;
     }
@@ -270,8 +270,7 @@ function insertSlide(json,index,item){
 }
 
 function save(){
-    json[formationNum]['userMovements'] = currentModifications;
-    updateModifications(json['users'],currentFormation);
+	return
 }
 
 function updateCurrentFormationDiv(){
@@ -317,7 +316,7 @@ function btn_play(){
 	updateCurrentFormationDiv()
 	switchFormation(json['formations'][i]);
     }
-    formationNum = json['formations'].length;
+    formationNum = json['formations'].length - 1;
     updateCurrentFormationDiv()
 }
 
@@ -327,41 +326,30 @@ function btn_add_formation(){
     frame['userMovements'] = {};
     var current = currentFormation['userMovements'];
     for(var key in currentFormation['userMovements']){
-	frame['userMovements'][key] = {};
-	frame['userMovements'][key]['xcor'] = current[key]['xcor'];
-	frame['userMovements'][key]['ycor'] = current[key]['ycor'];
-	frame['userTags'] = {};
+		frame['userMovements'][key] = {};
+		frame['userMovements'][key]['xcor'] = current[key]['xcor'];
+		frame['userMovements'][key]['ycor'] = current[key]['ycor'];
+		frame['userTags'] = {};
     }
     for(var key in currentFormation['userTags']){
-	frame['userTags'][key] = {};
-	frame['userTags'][key] = currentFormation['userTags'][key];
+		frame['userTags'][key] = {};
+		frame['userTags'][key] = currentFormation['userTags'][key];
 	}
 	insertSlide(json,formationNum + 1, frame);
 	updateCurrentFormationDiv()
 } 
 function btn_next(){
     instant = 0;
-    if(formationNum < json['formations'][formationNum]){
-	formationNum += 1;
-	switchFormation(json['formations'][formationNum]);
-	instant = 1;
-	updateCurrentFormationDiv()
+    if(formationNum < json['formations'].length){
+		formationNum += 1;
+		switchFormation(json['formations'][formationNum]);
+		instant = 1;
+		updateCurrentFormationDiv()
 	return true;
     }
     instant = 1;
     updateCurrentFormationDiv()
     return false;
-	instant = 0;
-	if(formationNum < json['formations'].length){
-	    switchFormation(json['formations'][formationNum]);
-	    formationNum += 1;
-	    instant = 1;
-	    updateCurrentFormationDiv()
-	    return true;
-	}
-	instant = 1;
-	updateCurrentFormationDiv();
-	return false;
 }
 
 function btn_create(){
@@ -369,8 +357,8 @@ function btn_create(){
     var tag = tagInput.value;
     for(var i = 0; i < json['users'].length; i++){
 	if(json['users'][i]['username'] == name){
-	    return;
-	}
+		return;
+		}
     }
     json['users'].push({'username':name,'color':'blue'});
     for(var i = 0; i < json['formations'].length; i++){
