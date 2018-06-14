@@ -52,8 +52,8 @@
 var json = null;
 var currentFormation = null;
 var currentModifications = null;
-var nameInput = document.getElementById('name').value;
-var tagInput = document.getElementById('tag').value;
+var nameInput = document.getElementById('name');
+var tagInput = document.getElementById('tag');
 var data = document.getElementById('data').getAttribute('value')
 
 function parseFormationData(data){
@@ -121,10 +121,8 @@ function initialize(){
 	.attr('height',scaleToScreen(getHeight()))
 	.attr('draggable',true);
     svgNode = svg.node();
-    svgNode.addEventListener('mousedown',startDragUser);
+    svgNode.addEventListener('click',startDragUser);
     svgNode.addEventListener('mousemove',dragUser);
-    svgNode.addEventListener('mouseup',stopDragUser);
-    svgNode.addEventListener('mouseleave',stopDragUser);
     currentModifications = {};
     currentFormation = json.formations[0];
     addGroup(json['users'],json.formations[0]);
@@ -132,37 +130,42 @@ function initialize(){
 }
 
 var selectedElement = null;
+var dragOn = false;
 
 function startDragUser(event){
-    if(event.target.getAttribute('id') == 'user'){
-	selectedElement = event.target;
-    }
+	if(dragOn){
+		stopDragUser();
+		dragOn = false;
+	}
+	else{
+		if(event.target.getAttribute('id') == 'user'){
+		selectedElement = event.target;
+		dragOn = true;
+		}
+	}
 }
 
 function dragUser(event){
     if(selectedElement != null){
-	event.preventDefault();
-	xcor = revScaleToScreen(event.clientX - offSetX);
-	ycor = revScaleToScreen(event.clientY - offSetY);
-	if (!(xcor < 1 || ycor < 1 || xcor > getWidth() - 1 || ycor > getHeight() - 1)){
-	    user = d3.select(selectedElement)
-		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
-//	    tag = svg.selectAll('#tag')
-//		.filter(function(t){
-// 		    return (tag.attr('username') == user.attr('username'))
-// 		})
-//		.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
-	    currentFormation['userMovements'][user.attr('username')]['xcor'] = xcor;
-	    currentFormation['userMovements'][user.attr('username')]['ycor'] = ycor;
-	}
+		event.preventDefault();
+		xcor = revScaleToScreen(event.clientX - offSetX);
+		ycor = revScaleToScreen(event.clientY - offSetY);
+		if (!(xcor < 1 || ycor < 1 || xcor > getWidth() - 1 || ycor > getHeight() - 1)){
+			user = d3.select(selectedElement)
+			.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
+		    tag = svg.selectAll('#tag')
+			.filter(function(t){
+	 		    return (t['username'] == user.attr('username'))
+			})
+			.attr('transform','translate(' + (event.clientX - offSetX) + ',' + (event.clientY - offSetY) + ')');
+			currentFormation['userMovements'][user.attr('username')]['xcor'] = xcor;
+			currentFormation['userMovements'][user.attr('username')]['ycor'] = ycor;
+		}
     }
 }
 
 function stopDragUser(event){
-    if(selectedElement != null){
 	selectedElement = null
-	save();
-    }
 }
 
 function addGroup(users,formation){
@@ -176,6 +179,8 @@ function addGroup(users,formation){
 	.attr('cy',0)
 	.attr('transform',
 	      function(user){
+			console.log('adding');
+			console.log(user);
 		  return 'translate(' + 
 		      scaleToScreen(formation['userMovements'][user['username']]['xcor'] + 1)
 		      + ',' + 
@@ -201,13 +206,10 @@ function addGroup(users,formation){
 		var header = user['username'] + ':';
 		return header + formation['userTags'][user['username']];
 	    })
-	.style('position','absolute')
-	.attr('left','0px')
-	.attr('top','0px')
 	.attr('transform',
 	      function(user){
 		  return 'translate(' +  scaleToScreen(formation['userMovements'][user['username']]['xcor']) + ',' + 
-		      scaleToScreen(formation['userMovements'][user['username']]['ycor'] + 1) + ')';
+		      scaleToScreen(formation['userMovements'][user['username']]['ycor']) + ')';
 	      })
 }
 
@@ -216,24 +218,26 @@ function moveUsers(formation){
     svg.selectAll('#user')
 	.each(function(){
 	    var user = d3.select(this);
-	    cx = scaleToScreen(formation['userMovements'][user.attr('username')]['xcor'] + 1);
-	    cy = scaleToScreen(formation['userMovements'][user.attr('username')]['ycor'] + 1);
+		console.log(this)
+	    cx = scaleToScreen(formation['userMovements'][user.attr('username')]['xcor'] );
+	    cy = scaleToScreen(formation['userMovements'][user.attr('username')]['ycor'] );
+		console.log("move:" + cx + ' ' + cy);
 	    user
 		.text(formation['userTags'][user.attr('username')])
 		.transition()
 		.attr('transform','translate(' + cx + ',' + cy + ')')
-		.duration(formation['timeTillNext'] * 1000 * instant);
+		.duration(formation['timeTillNext'] * 1000);
 	});
     svg.selectAll('#tag')
 	.each(function(){
 	    var tag = d3.select(this);
 	    x = scaleToScreen(formation['userMovements'][tag.attr('username')]['xcor']);
-	    y = scaleToScreen(formation['userMovements'][tag.attr('username')]['ycor'] + 1);
+	    y = scaleToScreen(formation['userMovements'][tag.attr('username')]['ycor']);
 	    tag
 		.html(tag['username'] + ':' + formation['userTags'][tag.attr('username')])
 		.transition()
 		.attr('transform','translate(' + x + ',' + y + ')')
-		.duration(formation['timeTillNext'] * 1000 * instant);
+		.duration(formation['timeTillNext'] * 1000);
 	});
 }
 
@@ -282,8 +286,8 @@ function updateCurrentFormationDiv(){
 function btn_previous(){
     instant = 0;
     if(formationNum > 0){
-	switchFormation(json['formations'][formationNum]);
 	formationNum -= 1;
+	switchFormation(json['formations'][formationNum]);
 	instant = 1;
 	updateCurrentFormationDiv()
 	return true;
@@ -355,11 +359,10 @@ function btn_create(){
     }
     json['users'].push({'username':name,'color':'blue'});
     for(var i = 0; i < json['formations'].length; i++){
-	json['formations'][i]['userMovements'][name] = {'xcor':1,'ycor':1};
-	json['formations'][i]['userTags'][name] = tag;
+		json['formations'][i]['userMovements'][name] = {'xcor':1,'ycor':1};
+		json['formations'][i]['userTags'][name] = tag;
     }
-    var users = [{'username':name,'color':'blue'}];
-    addGroup(user,currentFormation);
+    addGroup(json['users'],currentFormation);
 }
 
 function btn_update(){
