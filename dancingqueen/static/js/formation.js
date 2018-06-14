@@ -313,18 +313,13 @@ function sleep(milliseconds) {
   }
 }
 
+var interval = null;
 function btn_play(){
-    instant = 0;
-    switchFormation(json['formations'][0])
-    instant = 1;
-    for(var i = 0; i < json['formations'].length; i++){
-	formationNum = i;
-	updateCurrentFormationDiv()
-	switchFormation(json['formations'][i]);
-	sleep(1000);
-    }
-    formationNum = json['formations'].length - 1;
-    updateCurrentFormationDiv()
+		interval = setInterval(function(){
+			if(!btn_next()){
+				clearInterval(interval);
+			}
+		},1000);
 }
 
 function btn_add_formation(){
