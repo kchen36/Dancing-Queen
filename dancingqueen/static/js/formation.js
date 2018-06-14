@@ -304,6 +304,15 @@ function btn_del_formation(){
     updateCurrentFormationDiv()
 }
 
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
 function btn_play(){
     instant = 0;
     switchFormation(json['formations'][0])
@@ -312,6 +321,7 @@ function btn_play(){
 	formationNum = i;
 	updateCurrentFormationDiv()
 	switchFormation(json['formations'][i]);
+	sleep(1000);
     }
     formationNum = json['formations'].length - 1;
     updateCurrentFormationDiv()
