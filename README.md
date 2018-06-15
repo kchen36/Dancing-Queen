@@ -3,6 +3,9 @@
 ## deployment
 206.189.237.99
 
+##video
+https://youtu.be/2WjyDQUGbeI
+
 Kerry Chen(Project Manager), Philip Park, Fabiha Ahmed, Edmond Wong
 
 ## Description
